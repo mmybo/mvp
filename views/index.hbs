@@ -1,1 +1,8 @@
-<h1>Hello world!</h1>
+{{#if authenticatedUser}}
+<h1>You are signed in!</h1>
+<a href="/signout" class="btn btn-primary">Sign Out</a>
+{{else}}
+<h1>You are not signed in!</h1>
+<a class="btn btn-primary" href="/signin">Signin</a>
+<a href="/signup" class="btn btn-primary">Signup</a>
+{{/if}}
