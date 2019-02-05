@@ -13,7 +13,7 @@ const Product = new Schema({
     description: { type: String, required: true },
     requirements: { type: Array, required: true },
     //complete is marked true when/if the requester has agreed to purchase an item
-    complete: { type: Bool, required: true },
+    complete: { type: Boolean, default: false },
     //creating a chatroom, which will have its own schema
     chatroom: [{type: Schema.Types.ObjectId, ref: "ChatRoom"}]
 });

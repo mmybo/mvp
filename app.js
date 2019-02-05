@@ -19,10 +19,10 @@ app.use(require('./middleware/auth'));
 
 // Controllers
 require('./controllers/users')(app);
+require('./controllers/products')(app);
 
 app.get('/', (req, res) => {
     res.render('index');
 });
 
 app.listen(PORT, console.log('Running MMYBO on ' + PORT));
-
