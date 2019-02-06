@@ -1,14 +1,22 @@
-<form class="container" action="/signin" method="POST">
+<form class="card container mt-5 px-0" action="/signin" method="POST">
 
-    <div class="input-group">
-        <label for="email">Email:</label>
-        <input type="email" name="email" required>
-    </div>
-    <div class="input-group">
-        <label for="password">Password:</label>
-        <input type="password" name="password">
+    <div class="card-header">
+        <h4>Sign In:</h4>
     </div>
 
-    <button class="btn btn-primary">Signin</button>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <button class="btn btn-dark" type="submit">Sign In</button>
+    </div>
 
 </form>

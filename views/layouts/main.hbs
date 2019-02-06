@@ -9,10 +9,24 @@
 </head>
 
 <body>
+  <nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a href="/" class="navbar-brand">MMYBO</a>
+    <ul class="nav">
+      {{#if authenticatedUser}}
+      <li class="nav-item"><a href="/signout" class="nav-link text-light">Sign Out</a></li>
+      {{else}}
+      <li class="nav-item"><a href="/signup" class="nav-link text-light">Sign Up</a></li>
+      <li class="nav-item"><a href="/signin" class="nav-link text-light">Sign In</a></li>
+      {{/if}}
+    </ul>
+  </nav>
+
   <div class="alert alert-success d-none"></div>
   <div class="alert alert-danger d-none"></div>
 
-  {{{body}}}
+  <main class="container-fluid">
+    {{{body}}}
+  </main>
 
   {{!-- Bootstrap Scripts --}}
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
