@@ -1,18 +1,26 @@
-<form action="/signup" method="post">
+<form class="card container px-0 mt-5" action="/signup" method="post">
 
-    <div class="input-group">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required>
-    </div>
-    <div class="input-group">
-        <label for="email">Email:</label>
-        <input type="email" name="email" required>
-    </div>
-    <div class="input-group">
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
+    <div class="card-header">
+        <h4>Sign Up:</h4>
     </div>
 
-    <button class="btn btn-primary">Sign Up</button>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <button class="btn btn-dark" type="submit">Sign Up</button>
+    </div>
 
 </form>
