@@ -1,22 +1,27 @@
-<form class="card container mt-5 px-0" action="/signin" method="POST">
-
-    <div class="card-header">
-        <h4>Sign In:</h4>
+<div class="container text-center">
+    <div class="text-center">
+        <a href="/">
+            <img src="logo.png" class="text-center" height="75px" alt="MMYBO-logo">
+        </a>
     </div>
+    <form action="/signin" method="POST">
+        <div class="align-items-center">
+            <div class="input-group">
+                <label for="email" class="col-sm-4 col-form-label is-valid"> </label>
+                <div>
+                    <input type="email" style="margin:7px" name="email" placeholder="Email " required>    
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="password" class="col-sm-4 col-form-label is-valid" placeholder="Password: "></label>
+                <div>
+                    <input type="password" style="margin:7px" name="password" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-light float-center">Sign In</button>
 
-    <div class="card-body">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" class="form-control" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-    </div>
-
-    <div class="card-footer">
-        <button class="btn btn-dark" type="submit">Sign In</button>
-    </div>
-
-</form>
+    </form>
+</div>
