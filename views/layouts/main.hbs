@@ -19,8 +19,10 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-dark justify-content-between">
-    <a href="/" class="navbar-brand">MMYBO</a>
+  <nav class="navbar bg-light justify-content-between">
+    <a href="/">
+      <img src="/public/logo.png" width="50px" alt="">
+    </a>
     <ul class="nav">
       {{#if authenticatedUser}}
       <li class="nav-item"><a href="/signout" class="nav-link text-light">Sign Out</a></li>
