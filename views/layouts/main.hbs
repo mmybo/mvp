@@ -21,11 +21,12 @@
 <body>
   <nav class="navbar bg-light justify-content-between">
     <a href="/">
-      <img src="/public/logo.png" width="50px" alt="">
+      <img src="/public/logo.png" height="75px"  alt="">
     </a>
     <ul class="nav">
       {{#if authenticatedUser}}
-      <li class="nav-item"><a href="/signout" class="nav-link text-light">Sign Out</a></li>
+
+      <li class="nav-item"><a href="/signout" class="nav-link">Sign Out</a></li>
       {{else}}
       <li class="nav-item"><a href="/signup" class="nav-link text-light">Sign Up</a></li>
       <li class="nav-item"><a href="/signin" class="nav-link text-light">Sign In</a></li>
