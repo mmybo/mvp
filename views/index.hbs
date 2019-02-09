@@ -1,16 +1,90 @@
 <div class="container">
     {{#if authenticatedUser}}
     <!-- Wasn't able to log in or see what auth users see so I wasn't able to edit this, 1st priority next sprint-->
-    <h1>You are signed in!</h1>
-    <a href="/signout" class="btn btn-primary">Sign Out</a>
+    <h1>Welcome Back, {{authenticatedUser.name}}!</h1>
     {{else}}
-    <div class="text-center">
-        <div>
-            <img src="/public/logo.png" height="225px" alt="MMYBO-logo">
+    <div class="row" style="padding-top: 10px;">
+        <div class="col">
+            <div class="card" style="height: 12rem; width: 10rem;">
+                <img class="card-img-top" src="" alt="Product Image">
+                <div class="card-body">
+                    <h6 class="card-title">Product Title</h6>
+                    <p>Description</p>
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
         </div>
-        <div>
-            <a class="btn btn-light" href="/signin">Sign In</a>
-            <a href="/signup" class="btn btn-light">Sign Up</a>
+        <div class="col">
+            <div class="card" style="height: 12rem; width: 10rem;">
+                <img class="card-img-top" src="" alt="Product Image">
+                <div class="card-body">
+                    <h6 class="card-title">Product Title</h6>
+                    <p>Description</p>
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="height: 12rem; width: 10rem;">
+                <img class="card-img-top" src="" alt="Product Image">
+                <div class="card-body">
+                    <h6 class="card-title">Product Title</h6>
+                    <p>Description</p>
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="height: 12rem; width: 10rem;">
+                <img class="card-img-top" src="" alt="Product Image">
+                <div class="card-body">
+                    <h6 class="card-title">Product Title</h6>
+                    <p>Description</p>
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px;">
+        <div class="col">
+            <div class="card" style="height: 12rem; width: 10rem;">
+                <img class="card-img-top" src="" alt="Product Image">
+                <div class="card-body">
+                    <h6 class="card-title">Product Title</h6>
+                    <p>Description</p>
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="height: 12rem; width: 10rem;">
+                <img class="card-img-top" src="" alt="Product Image">
+                <div class="card-body">
+                    <h6 class="card-title">Product Title</h6>
+                    <p>Description</p>
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="height: 12rem; width: 10rem;">
+                <img class="card-img-top" src="" alt="Product Image">
+                <div class="card-body">
+                    <h6 class="card-title">Product Title</h6>
+                    <p>Description</p>
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="height: 12rem; width: 10rem;">
+                <img class="card-img-top" src="" alt="Product Image">
+                <div class="card-body">
+                    <h6 class="card-title">Product Title</h6>
+                    <p>Description</p>
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
         </div>
     </div>
     {{/if}}
