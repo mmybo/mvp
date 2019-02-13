@@ -46,7 +46,8 @@ require('./controllers/users')(app);
 require('./controllers/products')(app);
 
 app.get('/', (req, res) => {
-    res.render('index');
+    const products = require('./data/mockData').products;
+    res.render('index', { products });
 });
 
 //Start page for chat
