@@ -23,6 +23,7 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "jsonwebtoken": "^8.4.0",
+    "method-override": "^3.0.0",
     "mongoose": "^5.4.9",
     "socket.io": "^2.2.0"
   }

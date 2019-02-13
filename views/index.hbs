@@ -1,91 +1,21 @@
 <div class="container">
-    {{#if authenticatedUser}}
-    <!-- Wasn't able to log in or see what auth users see so I wasn't able to edit this, 1st priority next sprint-->
-    <h1>Welcome Back, {{authenticatedUser.name}}!</h1>
-    {{else}}
-    <div class="row" style="padding-top: 10px;">
-        <div class="col">
-            <div class="card" style="height: 12rem; width: 10rem;">
-                <img class="card-img-top" src="" alt="Product Image">
-                <div class="card-body">
-                    <h6 class="card-title">Product Title</h6>
-                    <p>Description</p>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
+    {{#each products}}
+    <div class="card">
+        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+        <div>
+            <h6 class="text-muted m-3" style="float:right">{{this.createdAt}}</h6>
+            <div style="height: 25px"></div>
         </div>
-        <div class="col">
-            <div class="card" style="height: 12rem; width: 10rem;">
-                <img class="card-img-top" src="" alt="Product Image">
-                <div class="card-body">
-                    <h6 class="card-title">Product Title</h6>
-                    <p>Description</p>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
+        <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <a href="/products/{{this._id}}" class="btn btn-dark stretched-link">More info</a>
         </div>
-        <div class="col">
-            <div class="card" style="height: 12rem; width: 10rem;">
-                <img class="card-img-top" src="" alt="Product Image">
-                <div class="card-body">
-                    <h6 class="card-title">Product Title</h6>
-                    <p>Description</p>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
+        <div class="card-footer bg-light d-flex justify-content-between">
+            <strong><a href="/users/{{this.requester._id}}" class="text-muted">{{this.requester.name}}</a></strong>
+            <h6 class="text-muted">{{this.offers}} Offers</h6>
         </div>
-        <div class="col">
-            <div class="card" style="height: 12rem; width: 10rem;">
-                <img class="card-img-top" src="" alt="Product Image">
-                <div class="card-body">
-                    <h6 class="card-title">Product Title</h6>
-                    <p>Description</p>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
-        </div>
+
     </div>
-    <div class="row" style="padding-top: 10px;">
-        <div class="col">
-            <div class="card" style="height: 12rem; width: 10rem;">
-                <img class="card-img-top" src="" alt="Product Image">
-                <div class="card-body">
-                    <h6 class="card-title">Product Title</h6>
-                    <p>Description</p>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="height: 12rem; width: 10rem;">
-                <img class="card-img-top" src="" alt="Product Image">
-                <div class="card-body">
-                    <h6 class="card-title">Product Title</h6>
-                    <p>Description</p>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="height: 12rem; width: 10rem;">
-                <img class="card-img-top" src="" alt="Product Image">
-                <div class="card-body">
-                    <h6 class="card-title">Product Title</h6>
-                    <p>Description</p>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="height: 12rem; width: 10rem;">
-                <img class="card-img-top" src="" alt="Product Image">
-                <div class="card-body">
-                    <h6 class="card-title">Product Title</h6>
-                    <p>Description</p>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{/if}}
+    {{/each}}
 </div>
