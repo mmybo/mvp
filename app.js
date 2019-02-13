@@ -13,7 +13,7 @@ require('./data/database');
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }));
 app.set('view engine', 'hbs');
 app.use(require('cookie-parser')());
-app.use('/public', express.static('public'));
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -28,11 +28,11 @@ let onlineUsers = {};
 
 // We want General channel to be available without having to be created.
 // The array value that comes with the channel key will be used to save each channel's messages.
-let channels = {"General": []}
+let channels = { "General": [] }
 
 // io.on("connection") is a special listener that fires whenever a new client connects.
 io.on('connection', (socket) => {
-      // This file will be read on new socket connections
+    // This file will be read on new socket connections
     // Make sure to send the users to our chat file
     require('./sockets/chat.js')(io, socket, onlineUsers, channels);
 })
@@ -46,7 +46,8 @@ require('./controllers/users')(app);
 require('./controllers/products')(app);
 
 app.get('/', (req, res) => {
-    res.render('index');
+    const products = require('./data/mockData').products;
+    res.render('index', { products });
 });
 
 //Start page for chat
