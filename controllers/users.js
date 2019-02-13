@@ -13,6 +13,20 @@ module.exports = function (app) {
         res.render('signin');
     });
 
+    // GET profile page
+    app.get('/users/:id', (req, res) => {
+        User.findById(req.params.id).then(user => {
+            res.render('profile', { user });
+        });
+    });
+
+    // GET authenticated user's profile page
+    app.get('/profile', (req, res) => {
+        if (!req.user)
+            return res.redirect('/signin?error=You are not signed in.');
+        res.render('profile', { user: req.user });
+    });
+
     // POST signup
     app.post('/signup', async (req, res) => {
         // Check if the user already exists
