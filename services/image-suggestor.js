@@ -10,12 +10,11 @@ const getImages = (text) => new Promise((resolve, reject) => {
 
     let images = [];
     scraper.on("image", (image) => {
-        images.push(image);
+        images.push(image.address);
     });
 
     scraper.on("end", () => {
-        /* We only care about the address (url) of the images */
-        resolve(images.map(obj => { return obj.address }));
+        resolve(images);
     });
 
     scraper.on("error", reject);
