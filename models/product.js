@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Product = new Schema({
@@ -13,12 +14,14 @@ const Product = new Schema({
     description: { type: String, required: true },
     requirements: { type: Array, required: true },
     //complete is marked true when/if the requester has agreed to purchase an item
-    complete: { type: Boolean, required: true },
+    complete: { type: Boolean },
     //creating a chatroom, which will have its own schema
     chatroom: [{ type: Schema.Types.ObjectId, ref: "ChatRoom" }]
 });
 
 Product.pre("save", function (next) {
+    //setting the default value for completion
+    this.complete = false;
     //createdAt and updatedAt, the alpha and omega
     const now = new Date();
     this.updatedAt = now;

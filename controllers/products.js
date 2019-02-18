@@ -5,6 +5,10 @@ const User = require('../models/user');
 module.exports = function(app) {
     app.use(methodOverride('_method'))
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.get('/products/new', (req, res) => {
+    var currentUser = req.user;
+    res.render('productRequest', { currentUser });
+    })
     app.post('/products', (req, res) => {
         if (req.user) {
         const product = new Product(req.body);
