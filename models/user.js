@@ -9,17 +9,12 @@ const UserSchema = new Schema({
     password: { type: String, select: false },
     rating: { type: Number },
     products: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
-});
-
+}, { timestamps: true });
 
 UserSchema.pre('save', function (next) {
-    this.updatedAt = new Date();
-    if (!this.type) {
-        this.type = 'user';
-    }
-    if (!this.isModified('password')) {
+    if (!this.isModified('password'))
         return next();
-    }
+
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(this.password, salt, (error, hash) => {
             this.password = hash;
@@ -27,7 +22,6 @@ UserSchema.pre('save', function (next) {
         });
     });
 });
-
 
 UserSchema.methods.comparePassword = function (password, done) {
     bcrypt.compare(password, this.password, done);

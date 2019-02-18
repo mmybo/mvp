@@ -1,9 +1,22 @@
-{{#if authenticatedUser}}
-<h1>You are signed in!</h1>
-<a href="/signout" class="btn btn-primary">Sign Out</a>
-<a href="/products-new" class="btn btn-primary">Make a Product Request</a>
-{{else}}
-<h1>You are not signed in!</h1>
-<a class="btn btn-primary" href="/signin">Signin</a>
-<a href="/signup" class="btn btn-primary">Signup</a>
-{{/if}}
+
+<div class="container">
+    {{#each products}}
+    <div class="card">
+        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+        <div>
+            <h6 class="text-muted m-3" style="float:right">{{this.createdAt}}</h6>
+            <div style="height: 25px"></div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <a href="/products/{{this._id}}" class="btn btn-dark stretched-link">More info</a>
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-between">
+            <strong><a href="/users/{{this.requester._id}}" class="text-muted">{{this.requester.name}}</a></strong>
+            <h6 class="text-muted">{{this.offers}} Offers</h6>
+        </div>
+
+    </div>
+    {{/each}}
+</div>
