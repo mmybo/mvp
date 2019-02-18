@@ -45,10 +45,10 @@ app.use(require('./middleware/auth'));
 require('./controllers/users')(app);
 require('./controllers/products')(app);
 
-app.get('/', (req, res) => {
-    const products = require('./data/mockData').products;
-    res.render('index', { products });
-});
+// app.get('/', (req, res) => {
+//     const products = require('./data/mockData').products;
+//     res.render('index', { products });
+// });
 
 //Start page for chat
 app.get('/chat', (req, res) => {

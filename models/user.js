@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
-
 const UserSchema = new Schema({
     memberSince: { type: Date, default: Date.now() },
     name: { type: String, required: true },

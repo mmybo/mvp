@@ -19,4 +19,23 @@
 
     </div>
     {{/each}}
+    {{#each fauxProducts}}
+    <div class="card">
+        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+        <div>
+            <h6 class="text-muted m-3" style="float:right">{{this.createdAt}}</h6>
+            <div style="height: 25px"></div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <a href="/products/{{this._id}}" class="btn btn-dark stretched-link">More info</a>
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-between">
+            <strong><a href="/users/{{this.requester._id}}" class="text-muted">{{this.requester.name}}</a></strong>
+            <h6 class="text-muted">{{this.offers}} Offers</h6>
+        </div>
+
+    </div>
+    {{/each}}
 </div>

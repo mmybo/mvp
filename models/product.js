@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Product = new Schema({
+    name: { type: String, required: true },
     createdAt: { type: Date },
     updatedAt: { type: Date },
     //requester: the person who creates the request for a product
@@ -11,6 +12,7 @@ const Product = new Schema({
     //a description of the product, not including the requirements they have
     //Example description: I want an iPhone.
     //Example requirement: Must be iPhone7 or greater
+    offers: { type: Number },
     description: { type: String, required: true },
     requirements: { type: Array, required: true },
     //complete is marked true when/if the requester has agreed to purchase an item
