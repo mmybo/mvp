@@ -2,6 +2,7 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const Product = require('../models/product');
 const User = require('../models/user');
+
 module.exports = function(app) {
     app.use(methodOverride('_method'))
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,18 +27,12 @@ module.exports = function(app) {
             return res.status(401).send({ message: "Something went wrong. Please make sure you are signed in" });
         }
     });
-    app.get('/products/:id', (req, res) => {
-    var currentUser = req.user;
-    Product.findById(req.params.id).then((product) => {
-        res.render('show-products', { product, currentUser })
-    }).catch((err) => {
-        console.log(err.message);
-        })
-    })
-    app.get('/products/:id/edit', (req, res) => {
-    var currentUser = req.user;
-    Product.findById(req.params.id, function(err, product) {
-        res.render('edit-product', { product, currentUser });
+    app.get('/products/:id', function(req, res) {
+        let currentUser = req.user;
+        Product.findById(req.params.id).then((product) => {
+            res.render('product', {product, currentUser});
+        }).catch((err ) => {
+            console.log(err.message);
         })
     })
     //TODO: Need to figure out the logic for what happens when a user makes a bid.
