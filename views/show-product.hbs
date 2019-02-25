@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>{{product.name}}</h1>
+    <h4>{{product.createdAt}}</h1>
+    <h3>{{product.requester}}</h3>
+    <br>
+    <h5>{{product.description}}</h5>
+    <br>
+    <br>
+    <p>{{product.requirements}}</p>
+    <br>
+    <h4>{{product.offers}}</h4>
+{{#if authenticatedUser}}
+    <a href="/products/{{product._id}}/edit"><b>Edit</b></a>
+     <p><form method="POST" action="/products/{{product._id}}?_method=DELETE">
+         <button type="submit">Destroy</button>
+     </form></p>
+{{/if}}
+ <br>
+{{#if product.complete}}
+<h1>Product Request No Longer Open</h1>
+{{/if}}
+</div>
