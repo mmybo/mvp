@@ -1,5 +1,15 @@
-.card {
+div.card {
     display: inline-block;
     width: 16rem;
     margin: 0.5rem;
 }
+
+/* PRODUCT REQUEST PAGE ------------- */
+#image-selector {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+#image-selector img {
+    cursor: pointer;
+}
+/* ---------------------------------- */
