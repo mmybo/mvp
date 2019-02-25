@@ -1,4 +1,8 @@
 
+// TODO: SHOULD BE INSIDE A CONTROLLER NOT INSIDE A SOCKETS FOLDER
+
+
+
 // const express = require('express')
 const path = require('path');
 const port = process.env.PORT || 5000
