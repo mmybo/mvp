@@ -2,6 +2,7 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const Product = require('../models/product');
 const User = require('../models/user');
+
 module.exports = function(app) {
     app.use(methodOverride('_method'))
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,7 +46,7 @@ module.exports = function(app) {
     app.get('/products/:id', (req, res) => {
         var currentUser = req.user;
         Product.findById(req.params.id).then((product) => {
-            res.render('show-product', { product, currentUser })
+            res.render('show-product', { product: product, currentUser })
         }).catch((err) => {
             console.log(err.message);
             })

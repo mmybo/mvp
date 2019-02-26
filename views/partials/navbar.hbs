@@ -1,0 +1,21 @@
+<nav class="navbar">
+    <div class="container">    
+        <a href="/" class="nav-link-color"> MMYBO </a>
+        {{!-- <img src="/images/logo.png" height="75px" alt=""> --}}
+
+        <ul class="nav navbar-custom">
+        {{#if authenticatedUser}}
+        <li><a href="/products/new" class="nav-link nav-link-color"> New Product Request</a></li>
+        <li><a href="/signout" class="nav-link nav-link-color"> Sign Out</a></li>
+        {{else}}
+        <li><a href="/signin" class="nav-link nav-link-color"> Sign In</a></li>
+        <li><a href="/signup" class="nav-link nav-link-color"> Sign Up</a></li>
+        {{/if}}
+        </ul>
+    </div>
+</nav>
+
+
+{{!-- <nav class="navbar justify-content-between">
+
+</nav> --}}

@@ -1,6 +1,6 @@
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
 const Product = new Schema({
     name: { type: String, required: true },
     createdAt: { type: Date },
@@ -32,4 +32,5 @@ Product.pre("save", function (next) {
     }
     next();
 });
+
 module.exports = mongoose.model("Product", Product);
