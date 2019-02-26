@@ -1,7 +1,46 @@
-div.card {
+/* MULTIPLE PAGES */
+html, body {
+    background-color: #9A9999;
+    margin-bottom: 250px;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #393838;
+    font-size: 28px;
+}
+.nav-link-color:hover { 
+    color: #9A9999; 
+}
+.nav-link-color:visited { 
+    color: white; 
+}
+.nav-link-color {
+    color: white;
+}
+
+/* INDEX PAGE */
+.index-page {
+    margin-top: 25px; 
+}
+
+/* SHOW PRODUCT PAGE */
+.show-product {
+    margin-top: 32px;
+}
+.card {
     display: inline-block;
     width: 16rem;
     margin: 0.5rem;
+}
+
+/* NEW PRODUCT REQUEST PAGE */
+.product-request {
+    margin-top: 232;
 }
 
 /* PRODUCT REQUEST PAGE ------------- */

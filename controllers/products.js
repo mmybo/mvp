@@ -42,7 +42,7 @@ module.exports = function (app) {
     app.get('/products/:id', (req, res) => {
         var currentUser = req.user;
         Product.findById(req.params.id).then((product) => {
-            res.render('show-product', { product, currentUser })
+            res.render('product', { product, currentUser })
         }).catch((err) => {
             console.log(err.message);
         })
