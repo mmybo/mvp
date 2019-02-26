@@ -13,6 +13,7 @@ require('./data/database');
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }));
 app.set('view engine', 'hbs');
 app.use(require('cookie-parser')());
+app.use(require('method-override')('_method'));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

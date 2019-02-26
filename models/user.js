@@ -7,7 +7,8 @@ const UserSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, select: false },
     rating: { type: Number },
-    products: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
+    products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+    chatrooms: [{ type: Schema.Types.ObjectId, ref: 'Chatroom' }]
 }, { timestamps: true });
 
 UserSchema.pre('save', function (next) {
