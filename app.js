@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
 
 
 // Checks authenticated state of user on every request
-app.use(require('./middleware/auth'));
+app.use(require('./middleware/check-auth'));
 
 // Controllers
 require('./controllers/users')(app);
