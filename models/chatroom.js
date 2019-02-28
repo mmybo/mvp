@@ -5,7 +5,7 @@ const ChatroomSchema = new Schema({
     channel: { type: String, required: true },
     requester: { type: Schema.Types.ObjectId, required: true },
     provider: { type: Schema.Types.ObjectId, required: true},
-    messages: {type: [Schema.Types.ObjectId]},
+    messages: {type: [Schema.Types.ObjectId], required: false},
     productReqCard: {type: Schema.Types.ObjectId}
 }, { timestamps: true });
 

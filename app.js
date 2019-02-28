@@ -19,24 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-//Socket.io
-const io = require('socket.io')(server);
-
-//store our online users here (locally)
-// Each socket has a unique ID that identifies it as a unique connected user. So we can make this ID do double duty to identify our users.
-let onlineUsers = {};
-
-// We want General channel to be available without having to be created.
-// The array value that comes with the channel key will be used to save each channel's messages.
-let channels = { "General": [] }
-
-// io.on("connection") is a special listener that fires whenever a new client connects.
-io.on('connection', (socket) => {
-    // This file will be read on new socket connections
-    // Make sure to send the users to our chat file
-    require('./sockets/chat.js')(io, socket, onlineUsers, channels);
-})
-
 
 // Checks authenticated state of user on every request
 app.use(require('./middleware/auth'));
@@ -44,22 +26,20 @@ app.use(require('./middleware/auth'));
 // Controllers
 require('./controllers/users')(app);
 require('./controllers/products')(app);
+require('./controllers/chats')(app);
 
-// app.get('/', (req, res) => {
-//     const products = require('./data/mockData').products;
-//     res.render('index', { products });
-// });
 
-//Start page for chat
-app.get('/chat', (req, res) => {
-    res.render('chatroom');
-})
+
+// app.get('/chat', (req, res) => {
+//
+//     res.render('chat-index');
+//
+// })
+
+
+
 
 server.listen(PORT, console.log('Running MMYBO on ' + PORT));
-
-
-
-
 
 
 // server.listen('3000', () => {

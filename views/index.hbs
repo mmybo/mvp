@@ -1,9 +1,9 @@
 
 <div class="container">
 
-    <!--NOTE: Wrapped card div in an form that makes a post request to '/chatrooms'-->
-    <form action="/chatooms" method= "post">
-        {{#each products}}
+<form action="/chats" method = "POST">
+    {{#each fauxProducts}}
+
             <div class="card">
                 <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
                 <div>
@@ -11,12 +11,23 @@
                     <div style="height: 25px"></div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{this.name}}</h5>
-                    <p class="card-text">{{this.description}}</p>
+                    <h5 class="card-title" name="cardTitle">{{this.name}}</h5>
+                    <p class="card-text" name="cardText">{{this.description}}</p>
 
                     <!--TODO: When button is submitted, create chatroom with current user and the owner of the card -->
+                    <!--TODO: Can I put a hidden input form inside this template and pass through the this._id, requester name, etc for the request card-->
                     <div class='d-flex'>
                         <a href="/products/{{this._id}}" class="btn btn-dark mx-1">More info</a>
+
+                        <!--NOTE: Does this work how I think it does?-->
+                        <input type="hidden" name="requestId" value={{this._id}}>
+                        <input type="hidden" name="requesterName" value={{this.requester.name}}>
+                        <input type="hidden" name="requesterId" value={{this.requester._id}}>
+
+
+
+
+
                       <button type="submit" class="btn btn-dark mx-1">Make A Bid</button>
                     </div>
 
@@ -26,7 +37,8 @@
                     <h6 class="text-muted">{{this.offers}} Offers</h6>
                 </div>
 
+
             </div>
-        {{/each}}
-    </form>
+    {{/each}}
+</form>
 </div>
