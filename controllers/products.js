@@ -7,7 +7,7 @@ module.exports = function (app) {
     app.get('/', (req, res) => {
         var fauxProducts = require('../data/mockData').products;
         var currentUser = req.user;
-        console.log(req.cookies);
+        // console.log(req.cookies);
         Product.find()
             .then(products => {
                 res.render('index', { products, fauxProducts, currentUser });
