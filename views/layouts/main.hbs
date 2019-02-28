@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
-  <title>MMYBO</title>
+  <title>Make Me Your Best Offer</title>
   <link rel="shortcut icon" href="/favicon.io" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -15,20 +15,7 @@
 </head>
 
 <body>
-  <nav class="navbar bg-light justify-content-between">
-    <a href="/">
-      <img src="/images/logo.png" height="75px" alt="">
-    </a>
-    <ul class="nav">
-      {{#if authenticatedUser}}
-      <li class="nav-item"><a href="/products/new" class="nav-link">Make Product Request</a></li>
-      <li class="nav-item"><a href="/signout" class="nav-link">Sign Out</a></li>
-      {{else}}
-      <li class="nav-item"><a href="/signup" class="nav-link">Sign Up</a></li>
-      <li class="nav-item"><a href="/signin" class="nav-link">Sign In</a></li>
-      {{/if}}
-    </ul>
-  </nav>
+  {{> navbar}}
 
   <div class="alert alert-success d-none"></div>
   <div class="alert alert-danger d-none"></div>
@@ -56,6 +43,7 @@
 
   {{!-- Custom Scripts --}}
   <script src="/js/alerts.js"></script>
+  <script src="/js/image-suggestor.js"></script>
 
 </body>
 

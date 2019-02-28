@@ -1,7 +1,41 @@
+<<<<<<< HEAD
 
 <div class="container">
 
 <form action="/chats" method = "POST">
+=======
+<div class="container index-page">
+    {{#each products}}
+    <div class="card">
+        {{!-- Commented out until the ability to add photos are added to product model --}}
+        {{!-- <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}"> --}}
+        
+        {{!-- fixing --}}
+        {{!-- <div>
+             <h6 class="text-muted m-3" style="float:right">{{this.createdAt}}</h6>
+            <div style="height: 25px"></div> 
+        </div> --}}
+
+        <div class="card-body">
+            <h5 class="card-title text-center">{{this.name}}</h5>
+            <p class="card-text text-center">{{this.description}}</p>
+            <p class="text-center">
+                <a href="/products/{{this._id}}" class="btn btn-dark">More Info</a>
+            </p>
+        </div>
+        {{!-- fixing  --}}
+        {{!-- <div class="card-footer bg-light d-flex justify-content-between">
+            <strong><a href="/users/{{this.requester._id}}" class="text-muted">{{this.requester.name}}</a></strong>
+            <h6 class="text-muted">{{this.offers}} Offers</h6>
+        </div> --}}
+    </div>
+    {{/each}}
+</div>
+
+
+{{!-- <div class="container">
+    faux products.... not necessary for production,, keeping it in case idk, probs should be deleted
+>>>>>>> 0ab91d256aa82951970b2f527b50b833859f1e0a
     {{#each fauxProducts}}
 
             <div class="card">
@@ -40,5 +74,9 @@
 
             </div>
     {{/each}}
+<<<<<<< HEAD
 </form>
 </div>
+=======
+</div> --}}
+>>>>>>> 0ab91d256aa82951970b2f527b50b833859f1e0a
