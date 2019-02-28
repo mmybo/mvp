@@ -1,61 +1,47 @@
-
-
-// const express = require('express')
-const exphbs = require('express-handlebars');
 const socketIO = require('socket.io');
 const http = require('http');
 //we need to use http ourselves and configure it with express
-const {generateMessage, generateLocationMessage} = require('../services/message');
-const {isRealString} = require('../services/string-validation')
+const { generateMessage, generateLocationMessage } = require('../services/message');
+const { isRealString } = require('../services/string-validation');
+const requireLogin = require('../middleware/require-login');
+const User = require('../models/user');
+const Product = require('../models/product');
+const Chatroom = require('../models/chatroom');
 
-// const {Users} = require('./utils/users')
-
-// const publicPath = path.join(__dirname, '../public/');
-// app.use(express.static(publicPath))
-
-
-// var app = express();
 module.exports = function (app) {
-
 
     app.get('/chatroom', (req, res) => {
         res.render('chatroom.hbs')
     })
 
 
-    app.post('/chats', (req, res) => {
+    app.post('/chats', requireLogin, (req, res) => {
 
-        // TODO: Need to add name attributes in the index page for attributes that I'm using to create the chatroom
+        const chatroom = new Chatroom(req.body);
 
-        if (req.user){
-            const chatroom = new Chatroom(req.body);
-
-            chatroom.channel = req.cardTitle + " Channel"
-            chatroom.requester = req.requesterId
-            chatroom.provider = req.user._id
-            chatroom.productReqCard = req.requestId
-
-
-            //TODO: Save chatroom, add chatroom to BOTH users chatroom arrays, catch errors, redirect to appropriate page
-            chatroom.save().then(chatroom => {
-                requester = User.findById(chatroom.requester)
-                requester.chatrooms.unshift(chatroom)
-                provider = User.findById(chatroom.provider)
-                provider.chatrooms.unshift(chatroom)
-
-                requester.save();
-                provider.save();
-
-                res.redirect('/manage-offers')
-
-            }).catch(err => {
-                console.log(err.message);
+        chatroom.save().then((chatroom) => {
+            // Adding this chatroom to the requester's list of chatrooms
+            /* User.findOneAndUpdate({ _id: chatroom.requester }, { $push: { chatrooms: chatroom } });  <-- Why doesn't this work? */
+            User.findById(chatroom.requester).then(user => {
+                user.chatrooms.unshift(chatroom);
+                user.save();
             });
 
+            // Incriment number of offers on product and add bidder to it's list of bidders
+            /* Product.findOneAndUpdate({ _id: chatroom.productId }, { $inc: { offers: 1 } });  <-- Why doesn't this work?
+               Product.findOneAndUpdate({ _id: chatroom.productId }, { $push: { bidders: chatroom.bidderId } });  <-- Why doesn't this work? */
+            Product.findById(chatroom.productId).then(product => {
+                product.bidders.unshift(chatroom.bidderId);
+                product.offers += 1;
+                product.save();
+            });
 
-        }else{
-            return res.status(404).send({message: "Something went wrong, your account may not have been found or our server was unable to create the chatroom"})
-        }
+            // Append new chatroom to authenticatedUser's chatroom's array
+            req.user.chatrooms.unshift(chatroom)
+            req.user.save();
+
+            res.redirect('/manage-offers');
+        });
 
     });
 
@@ -65,9 +51,10 @@ module.exports = function (app) {
     var server = http.createServer(app)
     var io = socketIO(server) //This is our websocket server, how we communicate between server and client
 
-    app.get('/manage-offers', (req, res) => {
+    app.get('/manage-offers', requireLogin, (req, res) => {
 
         //Find all the chatrooms of the user who hits the route
+        // Use req.user instead!
         userChatrooms = User.findById(req.user._id).then(user => {
             console.log("Users chatroom", chatrooms);
             return user.chatrooms
@@ -76,7 +63,7 @@ module.exports = function (app) {
         })
 
 
-        res.render('chatroom.hbs', {userChatrooms})
+        res.render('chatroom.hbs', { userChatrooms })
 
         // TODO: Need to render the manage offers page, with userChatrooms injecting each chatroom into a div into sidebar
         // TODO: When Channel is clicked, it should join the socket room using the chatroom._id (STRETCH CHALLENGE)it should reload the chat with chatroom.messages array based off the timestamped messages
@@ -85,7 +72,7 @@ module.exports = function (app) {
 
         //TODO: MUST PUT SOCKET LOGIC INSIDE CONTROLLER
 
-        
+
 
 
 
@@ -112,11 +99,11 @@ module.exports = function (app) {
                 // NOTE: Below TODO section is to account for users who already have previously established a chatroom connection
                 //TODO: Authenticate current user just as a user who exists, otherwise send an error
                 //TODO: We need another middleware auth to check if user has this chatroom by name and chatroom id in their Chatroom array
-                        //If they do, then grant access to the room
+                //If they do, then grant access to the room
 
 
 
-        //NOTE: The below TODO section is the set up upon click the "Make A Bid" button, not the reoccurring auth for entering the room as already established requesters and providers
+                //NOTE: The below TODO section is the set up upon click the "Make A Bid" button, not the reoccurring auth for entering the room as already established requesters and providers
 
                 //TODO: Authenticate current user just as a user who exists, otherwise send an error,
 
@@ -128,7 +115,7 @@ module.exports = function (app) {
 
 
                 //TODO: Middleware: Pass in a user object and if user is not either the requester or as a bidder, send back to index page
-                            // If they are either, then grant access to the chatroom
+                // If they are either, then grant access to the chatroom
 
 
                 socket.join(params.room);
@@ -155,7 +142,7 @@ module.exports = function (app) {
                 // TODO: Grab chatroom by socket id and channel name in a user's channels array
                 var user = users.getUser(socket.id);
 
-                if(user && isRealString(message.text)){ //String validation is important to keep to not allow empty strings to fill the chat
+                if (user && isRealString(message.text)) { //String validation is important to keep to not allow empty strings to fill the chat
                     // socket.emit emits to a single connection, io.emit emits to all connections
                     //TODO: Need to add "from" attribute to message model
                     //By changing from io.emit --> io.to(user.room).emit
@@ -176,7 +163,7 @@ module.exports = function (app) {
 
                 var user = users.getUser(socket.id);
 
-                if (user && isRealString(message.text)){
+                if (user && isRealString(message.text)) {
                     io.emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude))
                 }
             })
