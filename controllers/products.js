@@ -5,12 +5,10 @@ const ImageSuggestor = require('../services/image-suggestor');
 module.exports = function (app) {
 
     app.get('/', (req, res) => {
-        var fauxProducts = require('../data/mockData').products;
-        var currentUser = req.user;
-        // console.log(req.cookies);
-        Product.find()
+        // var fauxProducts = require('../data/mockData').products;
+        Product.find().populate('requester')
             .then(products => {
-                res.render('index', { products, fauxProducts, currentUser });
+                res.render('index', { products, products });
             })
             .catch(console.error);
     })
