@@ -55,12 +55,7 @@ module.exports = function (app) {
 
         //Find all the chatrooms of the user who hits the route
         // Use req.user instead!
-        userChatrooms = User.findById(req.user._id).then(user => {
-            console.log("Users chatroom", chatrooms);
-            return user.chatrooms
-        }).catch(err => {
-            console.log('Error', err);
-        })
+        userChatrooms = req.user.chatrooms // Array of all chatrooms that user is associated with
 
 
         res.render('chatroom.hbs', { userChatrooms })
@@ -70,8 +65,7 @@ module.exports = function (app) {
 
 
 
-        //TODO: MUST PUT SOCKET LOGIC INSIDE CONTROLLER
-
+        //TODO: PUT SOCKET LOGIC IN SEPRATE CONTROLLER
 
 
 
@@ -83,6 +77,9 @@ module.exports = function (app) {
         // built in event listener like connection lets you listen when a client connects to the server
         // 'socket' which is passed into the callback represents the individual socket as opposed to all the users connected to the server
         io.on('connection', (socket) => {
+
+            // require('./socket-temp.js')(io, socket)
+
             console.log('Server: new user connected');
 
 

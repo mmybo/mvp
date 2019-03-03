@@ -1,6 +1,8 @@
 // This middleware checks if there is an authenticated user in every request
+
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+
 
 module.exports = function (req, res, next) {
     if (req.cookies[process.env.COOKIE]) {

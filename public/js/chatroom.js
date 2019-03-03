@@ -80,6 +80,7 @@ $(document).ready(()=>{
   })
 
   //Refresh the online user list
+  // TODO: Refactor this accomadate the DELETE in CRUDed Channels, have button that not only deletes the instance of the Chatroom inside both user's Chatrooms array, but also removes the chatroom string from this list when the "Manage Offers" page is loaded
   socket.on('user has left', (onlineUsers) => {
     $('.usersOnline').empty();
     for(username in onlineUsers){

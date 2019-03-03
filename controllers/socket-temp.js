@@ -1,3 +1,12 @@
+
+module.exports = (io, socket) => {
+
+    socket.on('new message')
+
+}
+
+
+
 //lets you register an event listener
 // built in event listener like connection lets you listen when a client connects to the server
 // 'socket' which is passed into the callback represents the individual socket as opposed to all the users connected to the server
