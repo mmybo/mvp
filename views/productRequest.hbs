@@ -1,11 +1,11 @@
 <div class="container">
-     <div class="row">
+    <div class="row">
         <div class="col-centered">
             <h1> New Product Request </h1>
             <form action="/products" method="POST">
                 <div class="input-group">
-                    <label for="name" class="col-md-6">Product Name:</label> 
-                    <input type="text" name="name" class="col-md-6" required>
+                    <label for="name" class="col-md-6">Product Name:</label>
+                    <input type="text" name="name" id="product-title" class="col-md-6" required>
                 </div>
                 <div class="input-group">
                     <label for="description" class="col-md-6">Product Description:</label>
@@ -15,10 +15,16 @@
                     <label for="requirements" class="col-md-6">Requirements:</label>
                     <input type="text" name="requirements" class="col-md-6" required>
                 </div>
+                <div class="input-group">
+                    <label for="image">Image:</label>
+                    <input type="text" class="form-control form-control-readonly" id="product-image-input" name="image"
+                        placeholder="(Choose Below)" readonly>
+                </div>
+                <div id="image-selector">
+
+                </div>
                 <button class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
 </div>
-
-

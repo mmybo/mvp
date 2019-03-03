@@ -1,31 +1,61 @@
 
-  <body>
+    <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="/css/styles.css">
+    </head>
 
-    <form class="usernameForm">
-      <input id="usernameInput" placeholder="Username"></input>
-      <button id="createUserBtn">Join Chat</button>
-    </form>
+    <body class="chat">
 
-    <div class="mainContainer">
-      <div class="channelsAndUsersOnlineContainer">
-        <h1 class="brand">MMYBO</h1>
-        <div class="channels">
-            <h2 class="channelsLabel">Channels</h2>
-            <div class="newChannelForm"><input id="newChannelInput" placeholder="New Channel" /><button id="newChannelBtn">Create</button></div>
-            <div class="channel-current">General</div>
+        <div class="chat__sidebar">
+            <h3>MMYBO</h3>
+            <div id="users"></div>
         </div>
-        <h2>Online Users</h2>
-        <div class="usersOnline"></div>
-      </div>
-      <div class="chatContainer">
-        <div class="chatContainerFluid">
-          <div class="messageContainer">
-              <h2>Messages</h2>
-          </div>
-          <div class="textChatDivide"></div>
-          <div class="chatBox"><textarea id="chatInput" placeholder="Type a message"></textarea><button class="btn" id="sendChatBtn">Send</button></div>
-        </div>
-      </div>
-    </div>
 
-  </body>
+        <div class= "chat__main">
+            <ol id="messages" class="chat__messages"></ol>
+
+            <div class = "chat__footer">
+                <form id="message-form">
+                    <!--autofocus puts cursor in text box-->
+                  <input name="message" type="text" placeholder="Message" autofocus autocomplete="off"/>
+                  <button>Send</button>
+                </form>
+
+                <button id= "send-location">Send Location</button>
+
+            </div>
+
+        </div>
+
+      <script id= "message-template" type="text/template">
+            <li class= "messages">
+                <div class = "message__title">
+                    <h4>{{from}}</h4>
+                    <span>{{createdAt}}</span>
+                </div>
+                <div class = "message__body">
+                    <p>{{text}}</p>
+                </div>
+            </li>
+      </script>
+
+
+      <script id= "location-message-template" type="text/template">
+            <li class= "message">
+                <div class = "message__title">
+                    <h4>{{from}}</h4>
+                    <span>{{createdAt}}</span>
+                </div>
+                <div class = "message__body">
+                    <a href="{{url}}" target="_blank">My Current Location</a>
+                </div>
+            </li>
+      </script>
+
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="../sockets/libs/jq.js"></script>
+      <script src="../sockets/client-js.js"></script>
+      <script src="../sockets/libs/moment.js"></script>
+      <script src= "../sockets/libs/mustache.js"></script>
+      <script src= "../sockets/libs/deparam.js"></script>
+    </body>

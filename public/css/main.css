@@ -43,5 +43,12 @@ html, body {
     margin-top: 232;
 }
 
-/**/
-
+/* PRODUCT REQUEST PAGE ------------- */
+#image-selector {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+#image-selector img {
+    cursor: pointer;
+}
+/* ---------------------------------- */
