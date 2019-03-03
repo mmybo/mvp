@@ -52,7 +52,7 @@ module.exports = function (app) {
                 res.cookie(process.env.COOKIE, token, { maxAge: 60 * 60 * 24 * 1000, httpOnly: true });
                 res.redirect(`/?success=We've created your account and signed you in, ${user.name}.`);
             }).catch(error => {
-                res.redirect('/?error=' + error);
+                res.redirect('/signup?error=' + error);
             });
         }
     });
