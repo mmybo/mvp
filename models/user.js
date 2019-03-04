@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     memberSince: { type: Date, default: Date.now() },
@@ -16,7 +16,7 @@ UserSchema.pre('save', function (next) {
         return next();
 
     bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(this.password, salt, (error, hash) => {
+        bcrypt.hash(this.password, salt, null, (error, hash) => {
             this.password = hash;
             next();
         });

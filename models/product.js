@@ -13,6 +13,7 @@ const Product = new Schema({
     offers: { type: Number, default: 0 },
     description: { type: String, required: false },
     requirements: { type: String, required: false },
+    category: { type: String, default: "General"},
     //complete is marked true when/if the requester has agreed to purchase an item
     image: { type: String, required: true },
     complete: { type: Boolean, default: false },
