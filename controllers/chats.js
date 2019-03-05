@@ -53,35 +53,35 @@ module.exports = function (app) {
 
     app.get('/manage-offers', requireLogin, (req, res) => {
 
-        //Find all the chatrooms of the user who hits the route
-        // Use req.user instead!
         userChatrooms = req.user.chatrooms // Array of all chatrooms that user is associated with
 
-
+        //NOTE: Its ok to render the page first before establishing socket connection because it is the CLIENT that must first make the request to upgrade to a socket connection from HTTP
         res.render('chatroom.hbs', { userChatrooms })
+
+        //TODO: First get help on rendering the chatroom page with my original css
+
+        // For each chatroom, grab id and channel name, and generate a div tag its content = Channel string.
+        // Each div needs to emit a socket event that sends the chatroom object back so that the server can join a socket room based on chatroom._id
+        //TODO in JQuery/JS file: Instead of listening for a socket event, I need to access a ".userChatrooms" class and append a <div a href> for each chatroom in the user array when the page FIRST LOADS UP (NO SOCKET LISTENING)
+
+
+        //Find all the chatrooms of the user who hits the route
+
+
 
         // TODO: Need to render the manage offers page, with userChatrooms injecting each chatroom into a div into sidebar
         // TODO: When Channel is clicked, it should join the socket room using the chatroom._id (STRETCH CHALLENGE)it should reload the chat with chatroom.messages array based off the timestamped messages
 
 
 
-        //TODO: PUT SOCKET LOGIC IN SEPRATE CONTROLLER
-
-
-
-
-
-        console.log("AM I BEING RENDERED");
 
         //lets you register an event listener
         // built in event listener like connection lets you listen when a client connects to the server
         // 'socket' which is passed into the callback represents the individual socket as opposed to all the users connected to the server
         io.on('connection', (socket) => {
 
+
             // require('./socket-temp.js')(io, socket)
-
-            console.log('Server: new user connected');
-
 
             //socket.emit is not a listener. Instead of listening to an event, we are creating the event
             //first argument is the event that we are creating, then we send any data back to the client along with the new event
@@ -89,7 +89,6 @@ module.exports = function (app) {
             //callback handles the event acknowlegdements
             //Check for real strings in params, if not use callback
             socket.on('join', (params, callback) => {
-
 
                 //NOTE: Currently params is the object containing both the room name and user name
 
@@ -155,6 +154,10 @@ module.exports = function (app) {
                 // createdAt: new Date().getTime()//may want to use this to sort messages in a chatroom
 
             })
+
+            socket.on('updateUserList', function(users) {
+                // console.log("Users list: " users);
+            });
 
             socket.on('createLocationMessage', (coords) => {
 
