@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const emailer = require('../services/sendgrid');
 
 module.exports = function (app) {
 
@@ -48,6 +49,7 @@ module.exports = function (app) {
         } else {
             const newUser = new User(req.body);
             newUser.save().then(user => {
+                emailer.sendWelcomeEmail(user.name, user.email);
                 const token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: '60 days' });
                 res.cookie(process.env.COOKIE, token, { maxAge: 60 * 60 * 24 * 1000, httpOnly: true });
                 res.redirect(`/?success=We've created your account and signed you in, ${user.name}.`);
