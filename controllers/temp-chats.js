@@ -55,13 +55,21 @@ module.exports = function (app) {
 
     app.get('/manage-offers', requireLogin, (req, res) => {
 
-        var userChatrooms = req.user.chatrooms // Array of all chatrooms that user is associated with
+        var userChatrooms = []; // Array of all chatrooms that user is associated with
         var channels = req.user.chatrooms // Not renaming channels to userChatrooms for easy back changes
 
-        console.log(req.user.chatrooms);
-        //NOTE: Its ok to render the page first before establishing socket connection because it is the CLIENT that must first make the request to upgrade to a socket connection from HTTP
-        res.render('temp-chatroom.hbs', { userChatrooms })
+        for(chatroomId of req.user.chatrooms){
+          Chatroom.findById(chatroomId).then(chatroom => {
+            userChatrooms.unshift(chatroom)
+        }).catch(err => {
+            console.log("Looping over current user chatroom error:", err);
+            })
+        }
 
+
+        console.log(userChatrooms);
+        //NOTE: Its ok to render the page first before establishing socket connection because it is the CLIENT that must first make the request to upgrade to a socket connection from HTTP
+        res.render('temp-chatroom.hbs', {userChatrooms}) //NOTE: Not passing in userChatrooms because we can just iterate and add to container via jQuery
 
 
         //lets you register an event listener
@@ -124,8 +132,9 @@ module.exports = function (app) {
 
             })
 
-            //Have the socket join the room of the channel
+            //The client must send back the chatroom._id
             socket.on('user changed channel', (newChannel) => {
+
               socket.join(newChannel);
               socket.emit('user changed channel', {
                 channel : newChannel,

@@ -1,18 +1,22 @@
 //Client JS
 
+
 $(document).ready(()=>{
     const socket = io.connect();
     // let currentUser;
     // socket.emit('get online users');
     // //Each user should be in the general channel by default.
     // socket.emit('user changed channel', "General");
-    for(chatroom in req.user.chatrooms){
-     console.log("CHATROOM: ",chatroom);
-    }
 
-    for(chatroom in req.user.chatrooms){
-      $('.channels').append(`<div class="channel">${chatroom.channel}</div>`);
-    }
+
+    // for(chatroomId of req.user.chatrooms){
+    //
+    //   Chatroom.findById(chatroomId).then(chatroom => {
+    //     $('.channels').append(`<div class="channel">${chatroom.channel}</div>`);
+    // }).catch(err => {
+    //     console.log("Looping over current user chatroom error:", err);
+    //     })
+    // }
 
 
     //Users can change the channel by clicking on its name.
@@ -40,11 +44,11 @@ $(document).ready(()=>{
   $('#sendChatBtn').click((e) => {
     e.preventDefault();
     // Get the client's channel
-    let channel = $('.channel-current').text();
+    let channel = $('.channel-current').attr('id');
     let message = $('#chatInput').val();
     if(message.length > 0){
       socket.emit('new message', {
-        sender : currentUser,
+        sender : req.user.name,
         message : message,
         //Send the channel over to the server
         channel : channel
