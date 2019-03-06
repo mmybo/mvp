@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 const Schema = mongoose.Schema;
 
 const Product = new Schema({
@@ -13,24 +14,11 @@ const Product = new Schema({
     offers: { type: Number, default: 0 },
     description: { type: String, required: false },
     requirements: { type: String, required: false },
-    category: { type: String, default: "General"},
+    category: { type: String, default: "General" },
     //complete is marked true when/if the requester has agreed to purchase an item
     image: { type: String, required: true },
     complete: { type: Boolean, default: false },
 }, { timestamps: true });
-
-// Product.pre("save", function (next) {
-//     //setting the default value for completion
-//     this.complete = false;
-//     //createdAt and updatedAt, the alpha and omega
-//     const now = new Date();
-//     this.updatedAt = now;
-//     if (!this.createdAt) {
-//         this.createdAt = now;
-//     }
-//     next();
-// });
-
 
 
 module.exports = mongoose.model("Product", Product);
