@@ -5,17 +5,23 @@ const ImageSuggestor = require('../services/image-suggestor');
 module.exports = function (app) {
 
     app.get('/', (req, res) => {
-        // var fauxProducts = require('../data/mockData').products;
-        Product.find().populate('requester')
-            .then(products => {
-                res.render('index', { products, products });
-            })
-            .catch(console.error);
-    })
+        Product.find().populate('requester').then(products => {
+            res.render('index', { products });
+        }).catch(console.error);
+    });
+
+    app.get('/r/:category', (req, res) => {
+        Product.find({ category: req.params.category })
+            .populate('requester').then(products => {
+                res.render("index", { products });
+            }).catch(console.error);
+    });
+
     app.get('/products/new', (req, res) => {
         var currentUser = req.user;
         res.render('productRequest', { currentUser });
-    })
+    });
+
     app.post('/products', (req, res) => {
         if (req.user) {
             const product = new Product(req.body);

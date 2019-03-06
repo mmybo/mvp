@@ -27,7 +27,6 @@ app.use(require('./middleware/check-auth'));
 require('./controllers/users')(app);
 require('./controllers/products')(app);
 require('./controllers/chats')(app);
-require('./controllers/product-category')(app);
 server.listen(PORT, console.log('Running MMYBO on ' + PORT));
 
 module.exports = app;
