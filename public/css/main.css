@@ -32,7 +32,7 @@ html, body {
 .show-product {
     margin-top: 32px;
 }
-.card {
+div.card {
     display: inline-block;
     width: 16rem;
     margin: 0.5rem;
