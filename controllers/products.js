@@ -10,6 +10,16 @@ module.exports = function (app) {
         }).catch(console.error);
     });
 
+// When the user uses the search bar
+    app.get('/search', (req, res) => {
+        // console.log("IM IN SEARCH ROUTE!");
+        term = new RegExp(req.query.term, 'i')
+
+        Product.find({$or:[{'name': term}, {'category': term}]}).then(products => {
+            res.render('index', { products });
+        }).catch(console.error);
+    });
+
     app.get('/r/:category', (req, res) => {
         Product.find({ category: req.params.category })
             .populate('requester').then(products => {
