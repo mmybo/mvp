@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     password: { type: String, select: false },
     rating: { type: Number },
     products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-    chatrooms: [{ type: Schema.Types.ObjectId, ref: 'Chatroom' }]
+    chatrooms: [{ type: Schema.Types.ObjectId, ref: 'Chatroom' }] //Should probably change to chatroom_ids
 }, { timestamps: true });
 
 UserSchema.pre('save', function (next) {

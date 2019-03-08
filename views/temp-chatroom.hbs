@@ -11,8 +11,11 @@
         <center><h1 class="brand">Manage Offers</h1></center>
         <div class="channels">
             <h2 class="channelsLabel">Channels</h2>
-            <!-- <div class="newChannelForm"><input id="newChannelInput" placeholder="New Channel" /><button id="newChannelBtn">Create</button></div> -->
             <div class="channel-current">General</div>
+            <div class="channel">TEST</div>
+            {{#each userChatrooms}}
+                <div class="channel" id="{{this._id}}">{{this.channel}}</div>
+            {{/each}}
         </div>
 
         <!--NOTE: No need to alert users of other online users -->

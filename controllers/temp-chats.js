@@ -55,13 +55,21 @@ module.exports = function (app) {
 
     app.get('/manage-offers', requireLogin, (req, res) => {
 
-        var userChatrooms = req.user.chatrooms // Array of all chatrooms that user is associated with
+        var userChatrooms = []; // Array of all chatrooms that user is associated with
         var channels = req.user.chatrooms // Not renaming channels to userChatrooms for easy back changes
 
-        console.log(req.user.chatrooms);
-        //NOTE: Its ok to render the page first before establishing socket connection because it is the CLIENT that must first make the request to upgrade to a socket connection from HTTP
-        res.render('temp-chatroom.hbs', { userChatrooms })
+        for(chatroomId of req.user.chatrooms){
+          Chatroom.findById(chatroomId).then(chatroom => {
+            userChatrooms.unshift(chatroom)
+        }).catch(err => {
+            console.log("Looping over current user chatroom error:", err);
+            })
+        }
 
+
+        console.log(userChatrooms);
+        //NOTE: Its ok to render the page first before establishing socket connection because it is the CLIENT that must first make the request to upgrade to a socket connection from HTTP
+        res.render('temp-chatroom.hbs', {userChatrooms})
 
 
         //lets you register an event listener
@@ -84,9 +92,23 @@ module.exports = function (app) {
             })
 
             //Listen for new messages
-            socket.on('new message', (data) => {
+            socket.on('new message', async (data) => {
               //Save the new message to the channel.
-              channels[data.channel].push({sender : data.sender, message : data.message});
+
+              const current_chatroom = await Chatroom.findById(data.channel);
+
+              //TODO: Chatrooms need message attribute of type array in order for us to load messages & persist chat room messages
+
+              //NOTE: May not need to go through req.user if I already found the chatroom. Just add messages to chatroom messages arrary with the correct attributions to sender, content, etc
+              //TODO: Create and push message object to chatroom array of messages
+
+              const new_message = new Message(sender: data.sender, message: data.message)
+
+              current_chatroom.push(new_message);
+              //channels[data.channel].push({sender : data.sender, message : data.message});
+
+
+              //TODO: Instead of "data", should I be emitting new_message?
               //Emit only to sockets that are in that channel room.
               io.to(data.channel).emit('new message', data);
             });
@@ -124,12 +146,15 @@ module.exports = function (app) {
 
             })
 
-            //Have the socket join the room of the channel
+            //The client must send back the chatroom._id
             socket.on('user changed channel', (newChannel) => {
+
               socket.join(newChannel);
+
+
               socket.emit('user changed channel', {
-                channel : newChannel,
-                messages : channels[newChannel]
+                channel : newChannel
+                // messages : channels[newChannel]
               });
             })
 
