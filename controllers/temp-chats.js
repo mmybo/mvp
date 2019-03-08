@@ -102,7 +102,7 @@ module.exports = function (app) {
               //NOTE: May not need to go through req.user if I already found the chatroom. Just add messages to chatroom messages arrary with the correct attributions to sender, content, etc
               //TODO: Create and push message object to chatroom array of messages
 
-              const new_message = new Message(sender: data.sender, message: data.message)
+              const new_message = new Message({sender: data.sender, message: data.message})
 
               current_chatroom.push(new_message);
               //channels[data.channel].push({sender : data.sender, message : data.message});
