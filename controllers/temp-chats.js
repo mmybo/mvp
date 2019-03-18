@@ -76,7 +76,7 @@ module.exports = function (app) {
         // built in event listener like connection lets you listen when a client connects to the server
         // 'socket' which is passed into the callback represents the individual socket as opposed to all the users connected to the server
         io.on('connection', (socket) => {
-
+            console.log("Connection Made");
             //listen on "new user" socket emits
             // Now whenever the client emits a "new user" request, our server will be on it.
             socket.on('new user', (username) => {
@@ -94,6 +94,8 @@ module.exports = function (app) {
             //Listen for new messages
             socket.on('new message', async (data) => {
               //Save the new message to the channel.
+
+              console.log("New Message Event Listener: ", data);
 
               const current_chatroom = await Chatroom.findById(data.channel);
 

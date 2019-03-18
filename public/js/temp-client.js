@@ -21,7 +21,11 @@ $(document).ready(()=>{
 
     //Users can change the channel by clicking on its name.
     $(document).on('click', '.channel', (e)=>{
-      let newChannel_id = e.target.id;
+
+      console.log("Clicked Channel");
+      let newChannel_id = e.target.id; // What Id is being grabbed?
+      console.log("New Channel Id: ", newChannel_id);
+
       socket.emit('user changed channel', newChannel_id);
     });
 
@@ -44,7 +48,7 @@ $(document).ready(()=>{
   $('#sendChatBtn').click((e) => {
     e.preventDefault();
     // Get the client's channel
-    let channel = $('.channel-current').attr('id');
+    let channel = $('.channel-current').attr('id'); //Current Channel tags don't even have an "id" attribute. Should delete OR acc channel id to
     let message = $('#chatInput').val();
     if(message.length > 0){
       socket.emit('new message', {
