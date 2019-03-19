@@ -30,11 +30,10 @@
     "method-override": "^3.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.4.9",
-<<<<<<< HEAD
+
     "slackbots": "^1.2.0",
-=======
     "sendgrid": "^5.2.3",
->>>>>>> 962b4d4a2a73dd34973b446ba9355c82533d5ae1
+
     "socket.io": "^2.2.0"
   },
   "devDependencies": {

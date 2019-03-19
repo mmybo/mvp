@@ -51,14 +51,12 @@ module.exports = function (app) {
     var server = http.createServer(app)
     var io = socketIO(server) //This is our websocket server, how we communicate between server and client
 
-    app.get('/manage-offers', requireLogin, (req, res) => {
+    app.get('/manage-offers/:id', requireLogin, (req, res) => {
 
         userChatrooms = req.user.chatrooms // Array of all chatrooms that user is associated with
 
-        //NOTE: Its ok to render the page first before establishing socket connection because it is the CLIENT that must first make the request to upgrade to a socket connection from HTTP
         res.render('chatroom.hbs', { userChatrooms })
 
-        //TODO: First get help on rendering the chatroom page with my original css
 
         // For each chatroom, grab id and channel name, and generate a div tag its content = Channel string.
         // Each div needs to emit a socket event that sends the chatroom object back so that the server can join a socket room based on chatroom._id
@@ -66,7 +64,6 @@ module.exports = function (app) {
 
 
         //Find all the chatrooms of the user who hits the route
-
 
 
         // TODO: Need to render the manage offers page, with userChatrooms injecting each chatroom into a div into sidebar

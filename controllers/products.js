@@ -76,6 +76,7 @@ module.exports = function (app) {
                 console.log(err.message)
             })
     })
+    
     app.delete('/products/:id', function (req, res) {
         console.log("It is time for this product request... to end")
         Product.findByIdAndRemove(req.params.id).then((product) => {

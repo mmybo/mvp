@@ -5,23 +5,17 @@ $(document).ready(()=>{
     const socket = io.connect();
     // let currentUser;
     // socket.emit('get online users');
-    // //Each user should be in the general channel by default.
+    //Each user should be in the general channel by default.
     // socket.emit('user changed channel', "General");
 
 
-    // for(chatroomId of req.user.chatrooms){
-    //
-    //   Chatroom.findById(chatroomId).then(chatroom => {
-    //     $('.channels').append(`<div class="channel">${chatroom.channel}</div>`);
-    // }).catch(err => {
-    //     console.log("Looping over current user chatroom error:", err);
-    //     })
-    // }
 
 
     //Users can change the channel by clicking on its name.
     $(document).on('click', '.channel', (e)=>{
-      let newChannel = e.target.textContent;
+      let newChannel = e.target.id;
+      console.log("New Channel:", newChannel);
+      console.log("Emitting to: 'user changed channel'");
       socket.emit('user changed channel', newChannel);
     });
 
@@ -123,7 +117,7 @@ $(document).ready(()=>{
   socket.on('user changed channel', (data) => {
     $('.channel-current').addClass('channel');
     $('.channel-current').removeClass('channel-current');
-    $(`.channel:contains('${data.channel}')`).addClass('channel-current');
+    $(`#${data.channel}`).addClass('channel-current');
     $('.channel-current').removeClass('channel');
     $('.message').remove();
     data.messages.forEach((message) => {

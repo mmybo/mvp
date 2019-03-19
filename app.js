@@ -5,10 +5,12 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 var server = require('http').Server(app);
+require('./controllers/sockets')(server)
 
 
 require('dotenv').config();
 require('./data/database');
+
 
 // Middleware
 app.engine('hbs', exphbs({
@@ -26,9 +28,9 @@ app.use(require('./middleware/check-auth'));
 // Controllers
 require('./controllers/users')(app);
 require('./controllers/products')(app);
-require('./controllers/temp-chats')(app);
+require('./controllers/temp-chats')(app, server);
 
 
 server.listen(PORT, console.log('Running MMYBO on ' + PORT));
 
-module.exports = app;
+module.exports = server;
