@@ -27,8 +27,18 @@ module.exports = function(server){
         //Listen for new messages
         socket.on('new message', (data) => {
           //Save the new message to the channel.
-          channels[data.channel].push({sender : data.sender, message : data.message});
+
+          // Data: { sender: 'User 1',
+          // message: 'asdsss'}
+          console.log("Data:", data);
+          currentChatroom = Chatroom.findById(data.channel).then((chatroom) => {
+              message = new 
+          })
+          // TODO: Find Chatroom using data.channel, which is the chatroom id.
+          // populate the messages attribute with a newly created Message Object
+          channels[data.channel].push({sender : data.sender, message : data.message}); //NOTE: In localized version: channels = [<channel-name> : [Array of message objects]]
           //Emit only to sockets that are in that channel room.
+          // NOTE: Even though this was for the localized version, I think the logic is the same.
           io.to(data.channel).emit('new message', data);
         });
 
@@ -60,7 +70,7 @@ module.exports = function(server){
             // Emit to the client that made the new channel, to change their channel to the only one they made.
             socket.emit('user change channel', {
                 channel: newChannel,
-                messages: channels[newChannel]
+                messages: ['Test message1', 'Second message']
             });
 
         })
@@ -71,7 +81,7 @@ module.exports = function(server){
           // TODO: I DONT want to join a socket room using the channel string, I want unique channel id
           socket.join(newChannel);
 
-          console.log("SERVER SIDE: user changed channel");
+          // console.log("SERVER SIDE: user changed channel");
 
           socket.emit('user changed channel', {
             channel : newChannel,

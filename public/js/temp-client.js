@@ -37,12 +37,12 @@ $(document).ready(()=>{
 
   $('#sendChatBtn').click((e) => {
     e.preventDefault();
-    // Get the client's channel
     let channel = $('.channel-current').attr('id');
+    console.log("Send Chat to CHANNEL:", channel); //NOTE: Currently logging undefined
     let message = $('#chatInput').val();
     if(message.length > 0){
       socket.emit('new message', {
-        sender : req.user.name,
+        sender : "User 1", //NOTE: Cannot utilze req.use on client side
         message : message,
         //Send the channel over to the server
         channel : channel
