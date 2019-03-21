@@ -1,6 +1,7 @@
 const socketIO = require('socket.io');
 const Chatroom = require('../models/chatroom');
 const Message = require('../models/message');
+const User = require('../models/user');
 
 module.exports = function(server){
     var io = socketIO(server) //This is our websocket server, how we communicate between server and client
@@ -12,31 +13,26 @@ module.exports = function(server){
 
         console.log("Connection Established");
 
-        //listen on "new user" socket emits
-        // Now whenever the client emits a "new user" request, our server will be on it.
-        socket.on('new user', (username) => {
-            // Send the username to all clients currently connected
-            onlineUsers[username] = socket.id;
-            //Save the username to socket as well. This is important for later.
-            socket["username"] = username;
-            console.log(`${username} has joined the chat!`);
-            io.emit("new user", username);
-
-            // io.emit sends data to all clients on the connection.
-            // socket.emit sends data to the client that sent the original data to the server.
-        })
-
         //Listen for new messages
-        socket.on('new message', (data) => {
+        socket.on('new message', async(data) => {
           //Save the new message in the chatroom.
 
           console.log("Data:", data);
 
-          Chatroom.findById(data.channel).then((chatroom) => {
-            newMessage = new Message({sender: data.sender, content: data.message});
+          let username;
+
+          await User.findById(data.sender).then((user) => {
+            username = user.name;
+        })
+
+          await Chatroom.findById(data.channel).then((chatroom) => {
+            newMessage = new Message({sender: username, content: data.message});
             newMessage.save().then((message) => {
                 chatroom.messages.push(message);
                 chatroom.save();
+
+
+
                 console.log("Message Sent:", message);
 
                 io.to(data.channel).emit('new message', message);
@@ -51,7 +47,7 @@ module.exports = function(server){
         socket.on('get online users', () => {
           //Send over the onlineUsers
           socket.emit('get online users', onlineUsers);
-        })
+      });
 
         // socket.on("disconnect") is a special listener that fires when a user exits out of the application.
         //This fires when a user closes out of the application
@@ -63,36 +59,33 @@ module.exports = function(server){
 
 
 
-
-        socket.on('new channel', (newChannel)=> {
-            //Save the new channel to our channel's object. The array will hold the messages.
-            channels[newChannel] = [];
-            //Have the socket join the new channel room
-            socket.join(newChannel);
-            // Infrom all clients of new channel
-
-            // TODO: Should emit to everyone in socket room, not all socket connections, if needed
-            io.emit('new channel', newChannel);
-            // Emit to the client that made the new channel, to change their channel to the only one they made.
-            socket.emit('user change channel', {
-                channel: newChannel,
-                messages: ['Test message1', 'Second message']
-            });
-
-        })
-
         //The client must send back the chatroom._id
-        socket.on('user changed channel', (newChannel) => {
+        socket.on('user changed channel', async(newChannel) => {
+
+          let messageIds;
 
           // TODO: I DONT want to join a socket room using the channel string, I want unique channel id
           socket.join(newChannel);
 
           // console.log("SERVER SIDE: user changed channel");
 
+
           socket.emit('user changed channel', {
             channel : newChannel,
-            messages : ['Test message1', 'Second message']
+            // messages : ['Test message1', 'Second message']
           });
+
+          await Chatroom.findById(newChannel).then((chatroom) => {
+              messageIds = chatroom.messages
+          });
+
+          for (i=0; i < messageIds.length; i++){
+
+              Message.findById(messageIds[i]).then((message) => {
+                socket.emit('new message', message)
+              })
+          }
+
         })
 
     })

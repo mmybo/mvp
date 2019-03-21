@@ -75,15 +75,17 @@ $(document).ready(()=>{
   // Output the new message
   socket.on('new message', (data) => {
     //Only append the message if the user is currently in that channel
-    let currentChannel = $('.channel-current').attr();
-    if(currentChannel == data.channel){
-      $('.messageContainer').append(`
-        <div class="message">
-          <p class="messageUser">${data.sender}: </p>
-          <p class="messageText">${data.message}</p>
-        </div>
-      `);
-    }
+    let currentChannel = $('.channel-current').attr("id");
+
+    // console.log("Current Channel:", currentChannel);
+    // console.log("Data.channel:", data.channel);
+
+    $('.messageContainer').append(`
+      <div class="message">
+        <p class="messageUser">${data.sender}: </p>
+        <p class="messageText">${data.content}</p>
+      </div>
+    `);
   })
 
 // NOTE: Probably not going to use, but will keep for reference
@@ -122,14 +124,20 @@ $(document).ready(()=>{
     $(`#${data.channel}`).addClass('channel-current');
     $('.channel-current').removeClass('channel');
     $('.message').remove();
-    data.messages.forEach((message) => {
-      $('.messageContainer').append(`
-        <div class="message">
-          <p class="messageUser">${message.sender}: </p>
-          <p class="messageText">${message.message}</p>
-        </div>
-      `);
-    });
+
+
+    // NOTE: If I want to send Admin messages, I can send them via emitting 'user changed channel' event on the server side
+    if (data.messages){
+        data.messages.forEach((message) => {
+          $('.messageContainer').append(`
+            <div class="message">
+              <p class="messageUser">${message.sender}: </p>
+              <p class="messageText">${message.message}</p>
+            </div>
+          `);
+        });
+    }
+
   })
 
 
