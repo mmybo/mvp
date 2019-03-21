@@ -1,4 +1,6 @@
 const socketIO = require('socket.io');
+const Chatroom = require('../models/chatroom');
+const Message = require('../models/message');
 
 module.exports = function(server){
     var io = socketIO(server) //This is our websocket server, how we communicate between server and client
@@ -26,20 +28,24 @@ module.exports = function(server){
 
         //Listen for new messages
         socket.on('new message', (data) => {
-          //Save the new message to the channel.
+          //Save the new message in the chatroom.
 
-          // Data: { sender: 'User 1',
-          // message: 'asdsss'}
           console.log("Data:", data);
-          currentChatroom = Chatroom.findById(data.channel).then((chatroom) => {
-              message = new 
-          })
-          // TODO: Find Chatroom using data.channel, which is the chatroom id.
-          // populate the messages attribute with a newly created Message Object
-          channels[data.channel].push({sender : data.sender, message : data.message}); //NOTE: In localized version: channels = [<channel-name> : [Array of message objects]]
+
+          Chatroom.findById(data.channel).then((chatroom) => {
+            newMessage = new Message({sender: data.sender, content: data.message});
+            newMessage.save().then((message) => {
+                chatroom.messages.push(message);
+                chatroom.save();
+                console.log("Message Sent:", message);
+
+                io.to(data.channel).emit('new message', message);
+            })
+        })
+
+          // channels[data.channel].push({sender : data.sender, message : data.message}); //NOTE: In localized version: channels = [<channel-name> : [Array of message objects]]
           //Emit only to sockets that are in that channel room.
-          // NOTE: Even though this was for the localized version, I think the logic is the same.
-          io.to(data.channel).emit('new message', data);
+
         });
 
         socket.on('get online users', () => {

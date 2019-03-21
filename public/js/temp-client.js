@@ -37,12 +37,14 @@ $(document).ready(()=>{
 
   $('#sendChatBtn').click((e) => {
     e.preventDefault();
+    console.log($('.channel-current'));
     let channel = $('.channel-current').attr('id');
-    console.log("Send Chat to CHANNEL:", channel); //NOTE: Currently logging undefined
+    console.log("Send Chat to CHANNEL:", channel);
     let message = $('#chatInput').val();
     if(message.length > 0){
       socket.emit('new message', {
-        sender : "User 1", //NOTE: Cannot utilze req.use on client side
+        // TODO: Need to refactor to some how send user data via cookie to socket.
+        sender : $('#user_id').val(),
         message : message,
         //Send the channel over to the server
         channel : channel
@@ -73,7 +75,7 @@ $(document).ready(()=>{
   // Output the new message
   socket.on('new message', (data) => {
     //Only append the message if the user is currently in that channel
-    let currentChannel = $('.channel-current').text();
+    let currentChannel = $('.channel-current').attr();
     if(currentChannel == data.channel){
       $('.messageContainer').append(`
         <div class="message">
