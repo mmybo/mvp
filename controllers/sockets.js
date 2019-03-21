@@ -75,7 +75,7 @@ module.exports = function(server){
             // messages : ['Test message1', 'Second message']
           });
 
-          Chatroom.findById(newChannel).then((chatroom) => {
+          await Chatroom.findById(newChannel).then((chatroom) => {
               messageIds = chatroom.messages
           });
 
