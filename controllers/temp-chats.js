@@ -15,41 +15,48 @@ module.exports = function (app) {
     })
 
 
-    app.post('/chats', requireLogin, (req, res) => {
+    app.post('/chats', requireLogin, async(req, res) => {
 
-        Chatroom.find({channel: req.body.channel, requester: req.body.requester, bidderId: req.body.bidderId}).then((chatroom) => {
-            return res.redirect(`/manage-offers/${req.user._id}`)
-        })
 
-        const chatroom = new Chatroom(req.body);
+        await Chatroom.find({channel: req.body.channel, requester: req.body.requester, bidderId: req.body.bidderId}).then((chatroom) => {
 
-        chatroom.save().then((chatroom) => {
-            // Adding this chatroom to the requester's list of chatrooms
-            /* User.findOneAndUpdate({ _id: chatroom.requester }, { $push: { chatrooms: chatroom } });  <-- Why doesn't this work? */
-            User.findById(chatroom.requester).then(user => {
-                user.chatrooms.unshift(chatroom);
-                user.save();
-            });
+            if (chatroom){
+                return res.redirect(`/manage-offers/${req.user._id}`)
+            }
 
-            // Incriment number of offers on product and add bidder to it's list of bidders
-            /* Product.findOneAndUpdate({ _id: chatroom.productId }, { $inc: { offers: 1 } });  <-- Why doesn't this work?
-               Product.findOneAndUpdate({ _id: chatroom.productId }, { $push: { bidders: chatroom.bidderId } });  <-- Why doesn't this work? */
-            Product.findById(chatroom.productId).then(product => {
-                product.bidders.unshift(chatroom.bidderId);
-                product.offers += 1;
-                product.save();
-            });
+            chatroom = new Chatroom(req.body);
 
-            // Append new chatroom to authenticatedUser's chatroom's array
+            chatroom.save().then(async(chatroom) => {
+                // Adding this chatroom to the requester's list of chatrooms
+                /* User.findOneAndUpdate({ _id: chatroom.requester }, { $push: { chatrooms: chatroom } });  <-- Why doesn't this work? */
+                User.findById(chatroom.requester).then(user => {
+                    user.chatrooms.unshift(chatroom);
+                    user.save();
+                });
 
-            req.user.chatrooms.unshift(chatroom)
-            req.user.save();
+                // Incriment number of offers on product and add bidder to it's list of bidders
+                /* Product.findOneAndUpdate({ _id: chatroom.productId }, { $inc: { offers: 1 } });  <-- Why doesn't this work?
+                   Product.findOneAndUpdate({ _id: chatroom.productId }, { $push: { bidders: chatroom.bidderId } });  <-- Why doesn't this work? */
+                Product.findById(chatroom.productId).then(product => {
+                    product.bidders.unshift(chatroom.bidderId);
+                    product.offers += 1;
+                    product.save();
+                });
 
-            // res.redirect('/');
-            res.redirect(`manage-offers/${req.user._id}`);
+                // Append new chatroom to authenticatedUser's chatroom's array
+
+                req.user.chatrooms.unshift(chatroom)
+                req.user.save();
+
+
+                res.redirect(`manage-offers/${req.user._id}`);
+
+
+            console.log("IM STILL RUNNING");
+
         });
-
     });
+});
 
 
 
