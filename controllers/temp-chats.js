@@ -17,6 +17,10 @@ module.exports = function (app) {
 
     app.post('/chats', requireLogin, (req, res) => {
 
+        Chatroom.find({channel: req.body.channel, requester: req.body.requester, bidderId: req.body.bidderId}).then((chatroom) => {
+            console.log("CHANNEL ALREADY EXISTS!");
+        })
+
         const chatroom = new Chatroom(req.body);
 
         chatroom.save().then((chatroom) => {
