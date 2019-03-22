@@ -1,18 +1,20 @@
 <div class="container mt-2">
 
+    <!-- TODO: Somehow use jQuery to re-render this page with alert if chat room already exists, problem is that the page is not being rendered from the post route that is supposed to be throwing the error-->
+    <!-- <div class="chatroom-alert"></div> -->
+
 <!--Chatroom Already Exists Alert-->
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col">
-                <div class="alert alert-danger alert-dismissable" role="alert">
+                <div class="alert alert-danger alert-dismissable fade show" role="alert">
                     <button type="button" name="button" class="close" data-dismiss="alert"> <span aria-hidden="true">&times;</span></button>
                     <h4>Chatroom already exists!</h4>
-                    <p>View Existing Chatroom In  ---> <a href="/manage-offers/{{authenticatedUser._id}}" class="alert-link">Manage Offers</a></p>
-
+                    <p>View Existing Chatroom In: <a href="/manage-offers/{{authenticatedUser._id}}" class="alert-link">Manage Offers</a></p>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <a href="/r/appliances" class="btn btn-dark mx-1">Appliances</a>
