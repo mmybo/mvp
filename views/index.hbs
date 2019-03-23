@@ -1,59 +1,129 @@
-<div class="container mt-2">
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- TODO: Somehow use jQuery to re-render this page with alert if chat room already exists, problem is that the page is not being rendered from the post route that is supposed to be throwing the error-->
-    <!-- <div class="chatroom-alert"></div> -->
+<head>
 
-<!--Chatroom Already Exists Alert-->
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-danger alert-dismissable fade show" role="alert">
-                    <button type="button" name="button" class="close" data-dismiss="alert"> <span aria-hidden="true">&times;</span></button>
-                    <h4>Chatroom already exists!</h4>
-                    <p>View Existing Chatroom In: <a href="/manage-offers/{{authenticatedUser._id}}" class="alert-link">Manage Offers</a></p>
-                </div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Make Your Best Offer</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/mystyles.css">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<!--NOTE: For different icons: https://fontawesome.com/icons?s=solid-->
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Search For Products That You Can Provide!</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form action="/search">
+            <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input type="text" class="form-control form-control-lg" placeholder="Search for items people want to buy" name="term">
+              </div>
+              <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-block btn-lg btn-primary" name="term">Search</button>
+              </div>
             </div>
+          </form>
         </div>
-    </div> -->
-
-
-    <a href="/r/appliances" class="btn btn-dark mx-1">Appliances</a>
-    <a href="/r/books" class="btn btn-dark mx-1">Books</a>
-    <a href="/r/computers" class="btn btn-dark mx-1">Computers</a>
-    <a href="/r/electronics" class="btn btn-dark mx-1">Electronics</a>
-    <a href="/r/movies-tv" class="btn btn-dark mx-1">Movies/TV</a>
-    <a href="/r/music" class="btn btn-dark mx-1">Music</a>
-    <a href="/r/phones" class="btn btn-dark mx-1">Phones</a>
-    <a href="/r/sports-outdoor" class="btn btn-dark mx-1">Sports/Outdoor</a>
-    <a href="/r/video-games" class="btn btn-dark mx-1">Video Games</a>
-    {{#each products}}
-    <div class="card">
-        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
-        <div>
-            <h6 class="text-muted m-3 format-timefrom" style="float:right">{{this.createdAt}}</h6>
-            <div style="height: 25px"></div>
-        </div>
-        <div class="card-body">
-            <h5 class="card-title" name="cardTitle">{{this.name}}</h5>
-            <p class="card-text" name="cardText">{{this.description}}</p>
-
-            <div class='d-flex'>
-                <a href="/products/{{this._id}}" class="btn btn-dark mx-1">More info</a>
-
-                <form action="/chats" method="post">
-                    <input type="hidden" name="productId" value="{{this._id}}">
-                    <input type="hidden" name="requester" value="{{this.requester._id}}">
-                    <input type="hidden" name="bidderId" value="{{@root/authenticatedUser._id}}">
-                    <input type="hidden" name="channel" value="{{this.name}} Channel">
-                    <button type="submit" class="btn btn-dark mx-1">Make A Bid</button>
-                </form>
-            </div>
-
-        </div>
-        <div class="card-footer bg-light d-flex justify-content-between">
-            <strong><a href="/users/{{this.requester._id}}" class="text-muted">{{this.requester.name}}</a></strong>
-            <h6 class="text-muted">{{this.offers}} Offers</h6>
-        </div>
+      </div>
     </div>
-    {{/each}}
-</div>
+  </header>
+
+<!--TODO: Make each image a link to the appropriate page when I integrate with the node app-->
+
+  <!-- Icons Grid -->
+  <section class="features-icons bg-light text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-users m-auto text-primary"></i>
+            </div>
+            <!--TODO: Change to Account Logo-->
+            <h3>Create An Account</h3>
+            <p class="lead mb-0">Click on the Sign In button to make an account to that you can make product requests and fufill them</p>
+
+          </div>
+        </div>
+        <div class="col-lg-4">
+            <!-- <span class="oi oi-magnifying-glass"></span> -->
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-search-dollar m-auto text-primary"></i>
+            </div>
+            <!--TODO: Change to Search Logo-->
+            <h3>Product Request Or Fufill</h3>
+            <p class="lead mb-0">Search for product requests to fufill, or make one yourself</p>
+
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-check m-auto text-primary"></i>
+            </div>
+            <h3>Manage And Make Offers</h3>
+            <p class="lead mb-0">Users enter chatrooms with people who have made offers to sell the item identified in product requsts</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <br>
+  <br>
+
+  <!-- Call to Action -->
+  <section class="call-to-action text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form>
+            <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+              </div>
+              <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

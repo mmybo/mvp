@@ -1,0 +1,42 @@
+
+<nav class="navbar">
+
+    <a href="/" class="navbar-brand text-light"> MMYBO </a>
+    {{!-- <img src="/images/logo.png" height="75px" alt=""> --}}
+
+    <ul class="nav nav-right">
+        {{#if authenticatedUser}}
+        <div class="btn-group">
+            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                {{authenticatedUser.name}}
+            </button>
+
+            <form class="form-inline my-2 my-lg-0" action="/search">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='term'>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="/products/new">New Product Request</a>
+                <a class="dropdown-item" href="/manage-offers/{{authenticatedUser._id}}">Manage Offers</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/signout">Sign Out</a>
+            </div>
+        </div>
+        {{else}}
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <li><a href="/signin" class="nav-link nav-link-color"> Sign In</a></li>
+        <li><a href="/signup" class="nav-link nav-link-color"> Sign Up</a></li>
+        {{/if}}
+    </ul>
+
+</nav>
+
+
+{{!-- <nav class="navbar justify-content-between">
+
+</nav> --}}
