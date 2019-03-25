@@ -8,6 +8,9 @@
   background-size: cover;
   overflow: scroll;
 }
+.header{
+    color: white;
+}
 .background.image {
   filter: blur(5px) grayscale(100%);
   -webkit-filter: blur(5px) grayscale(100%);

@@ -1,7 +1,5 @@
 <head>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="product-show-page.css">
+    <link rel="stylesheet" href="/css/product-show-page.css">
 </head>
 <div class='background image'></div>
 <div class='background overlay'>
@@ -12,8 +10,8 @@
     </div><div class='content inline'>
       <div class='header'><center>{{product.name}}</center></div>
       <div class='body'><span class='category'>{{product.category}}</span><span class='material'>Requster's Ask: {{$XYZ}}</span>
-          <span class='body-header'>Description</span> {{product.description}}
-          <span class='body-header'>Requirements</span> {{product.requirements}}
+          <span class='body-header'>Description: {{product.description}}</span>
+          <span class='body-header'>Requirements: {{product.requirements}}</span>
       <div class='footer'>
           <!--TODO: ADD req.user._id to manage offers link-->
         <a href='/manage-offers/{{authenticatedUser._id}}'>Manage Offers</a>

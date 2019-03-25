@@ -10,6 +10,14 @@
 
 }
 
+.home-icon {
+    margin: 500px auto
+}
+
+.search-height{
+    height: 500px
+}
+
 .features-icons {
     padding-top: 7rem;
     padding-bottom: 7rem;
