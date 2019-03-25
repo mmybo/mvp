@@ -18,7 +18,7 @@ module.exports = function (app) {
     app.get('/search', (req, res) => {
         // console.log("IM IN SEARCH ROUTE!");
         term = new RegExp(req.query.term, 'i')
-
+        
         Product.find({$or:[{'name': term}, {'category': term}, {'description': term}]}).then(products => {
             res.render('index', { products });
 
