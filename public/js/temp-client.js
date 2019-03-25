@@ -9,7 +9,13 @@ $(document).ready(()=>{
     // socket.emit('user changed channel', "General");
 
 
-
+    // Hide left pane
+    $('#collapse-btn').click(() => {
+      $('#rightPane').toggleClass('maximizedRightPane');
+      $('#leftPane').toggleClass('hiddenLeftPane');
+      $('#leftPane').children().toggleClass('hidden');
+      $('#collapse-btn').toggleClass('hiddenCollapseBtn');
+    });
 
     //Users can change the channel by clicking on its name.
     $(document).on('click', '.channel', (e)=>{

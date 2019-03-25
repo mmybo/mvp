@@ -78,7 +78,7 @@ module.exports = function (app) {
 
         // console.log("User's chat rooms:", userChatrooms);
 
-        res.render('temp-chatroom.hbs', {userChatrooms}) // TODO: Trying to pass in an array of req.user's chatrooms and render all of them in the sidebar
+        res.render('temp-chatroom.hbs', {userChatrooms}) // Trying to pass in an array of req.user's chatrooms and render all of them in the sidebar
 
 
     })

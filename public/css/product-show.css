@@ -1,0 +1,130 @@
+
+.background {
+  position: fixed;
+  top: -10px;
+  right: -10px;
+  left: -10px;
+  bottom: -10px;
+  background-size: cover;
+  overflow: scroll;
+}
+.background.image {
+  filter: blur(5px) grayscale(100%);
+  -webkit-filter: blur(5px) grayscale(100%);
+  background: url("https://trakke.co.uk/wp-content/uploads/2014/12/IMG_0504.jpg") center center no-repeat;
+  background-size: cover;
+}
+.background.overlay {
+  background: linear-gradient(45deg, rgba(255, 245, 18, 0.2), rgba(103, 97, 68, 0.8));
+}
+
+.section {
+  z-index: 1;
+  background-color: white;
+  width: 600px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 100px auto;
+  position: relative;
+}
+.section img.main-photo {
+  width: 300px;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 70;
+}
+.section img.main-photo.active {
+  opacity: 1;
+  visibility: visible;
+}
+.section .sub img {
+  opacity: 0.5;
+  width: 100px;
+}
+.section .sub img:hover {
+  opacity: 1;
+}
+.section .inline {
+  display: inline-block;
+  vertical-align: top;
+}
+.section .photos {
+  width: 300px;
+}
+.section .photos .small-photos {
+  margin-top: 300px;
+  display: flex;
+  margin-bottom: 10px;
+}
+.section .content {
+  background: linear-gradient(to bottom, #f5f5f5, #fff);
+  width: 300px;
+}
+.section .content .header {
+  padding: 20px;
+  display: block;
+  background-color: #333;
+  border-left: 5px solid #ff6700;
+  margin-top: -20px;
+  margin-right: -20px;
+  margin-left: -60px;
+  padding-left: 75px;
+  padding-right: 40px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.section .content .header .price, .section .content .header .name {
+  font-weight: 800;
+  color: white;
+  text-shadow: 0px 1px 2px black;
+  font-size: 1.2em;
+}
+.section .content .header .price {
+  float: right;
+  font-size: 1em;
+  margin-top: 2px;
+}
+.section .content .body {
+  padding: 20px;
+  font-size: 0.8em;
+}
+.section .content .body .material, .section .content .body .category {
+  color: #aaa;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.section .content .body .material {
+  float: right;
+}
+.section .content .body .body-header {
+  font-weight: 800;
+  margin-bottom: 10px;
+  display: block;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+.section .content .footer a {
+  position: absolute;
+  bottom: -20px;
+  line-height: 60px;
+  right: 0px;
+  left: 300px;
+  text-align: center;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: 0.4s ease all;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  background-color: #333;
+  color: #fff;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}
+.section .content .footer a:hover {
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+  bottom: -18px;
+  text-shadow: 0px 1px 2px rgba(255, 255, 255, 0.5);
+  background-color: #ff6700;
+  color: #222;
+}

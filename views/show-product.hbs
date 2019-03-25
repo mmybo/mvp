@@ -1,26 +1,41 @@
-<div class="container show-product">
-    <h1> {{product.name}} </h1>
-    <h5> Description: </h5>
-    <p> {{product.description}} </p>
-    <h5> Requirements </h5>
-    <p>{{product.requirements}} </p>
-    <img src="{{product.image}}" alt="">
+<head>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="product-show.css">
+</head>
+<div class='background image'></div>
+<div class='background overlay'>
+  <div class='section'>
+    <div class='photos inline'>
+      <img class='main-photo active' id='lg-1' src="{{product.image}}">
 
-    {{!-- KEEP COMMENTED OUT --}}
-    {{!-- <h4>{{product.createdAt}}</h1>
-    <h3>{{product.requester}}</h3>
-    <br>
-    <h4>{{product.offers}}</h4> --}}
+    </div><div class='content inline'>
+      <div class='header'><center>{{product.name}}</center></div>
+      <div class='body'><span class='category'>{{product.category}}</span><span class='material'>Requster's Ask: {{$XYZ}}</span>
+          <span class='body-header'>Description</span> {{product.description}}
+          <span class='body-header'>Requirements</span> {{product.requirements}}
+      <div class='footer'>
+          <!--TODO: ADD req.user._id to manage offers link-->
+        <a href='/manage-offers/{{authenticatedUser._id}}'>Manage Offers</a>
+      </div>
 
-    {{#ifEquals authenticatedUser._id product.requester}}
-    <button>
-        <a href="/products/{{product._id}}/edit"><b>Edit</b></a>
-    </button>
-    <form method="POST" action="/products/{{product._id}}?_method=DELETE">
-        <button type="submit"> Delete </button>
-    </form>
-    {{/ifEquals}}
-    {{#if product.complete}}
-    <h1>Product Request No Longer Open</h1>
-    {{/if}}
+      <!--TODO: Add edit AND delete button-->
+      <!-- {{#ifEquals authenticatedUser._id product.requester}}
+      <button>
+          <a href="/products/{{product._id}}/edit"><b>Edit</b></a>
+      </button>
+      <form method="POST" action="/products/{{product._id}}?_method=DELETE">
+          <button type="submit"> Delete </button>
+      </form>
+      {{/ifEquals}}
+      {{#if product.complete}}
+      <h1>Product Request No Longer Open</h1>
+      {{/if}} -->
+
+    </div>
+</div>
+
+</div>
+
+
 </div>

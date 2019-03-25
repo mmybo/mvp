@@ -1,0 +1,121 @@
+
+<head>
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="user-profile-styles.css" >
+</head>
+
+<body>
+    <div class="container">
+        <div class="row profile">
+    		<div class="col-md-3">
+    			<div class="profile-sidebar">
+    				<!-- SIDEBAR USERPIC -->
+    				<div class="profile-userpic">
+    					<center><img src="https://static.change.org/profile-img/default-user-profile.svg" class="img-responsive" alt=""></center>
+    				</div>
+    				<!-- END SIDEBAR USERPIC -->
+    				<!-- SIDEBAR USER TITLE -->
+    				<div class="profile-usertitle">
+
+    					<div class="profile-usertitle-name">
+    						{{user.name}}
+    					</div>
+    					<div class="profile-usertitle-job">
+                            Email: {{user.email}}
+    					</div>
+                        <div class="profile-usertitle-job">
+    					    MemberSince: {{user.memberSince}}
+                        </div>
+
+    				</div>
+    				<!-- END SIDEBAR USER TITLE -->
+    			</div>
+    		</div>
+    		<div class="col-md-9">
+                <div class="profile-content">
+    			   <center>Product Requests Made</center>
+
+                   {{#each user.products}}
+                   <!-- Fill with all of current user's product request cards, but no ability to make a bid-->
+                       <div class="card">
+                           <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+                           <div>
+                               <h6 class="text-muted m-3 format-timefrom" style="float:right">{{this.createdAt}}</h6>
+                               <div style="height: 25px"></div>
+                           </div>
+                           <div class="card-body">
+                               <h5 class="card-title" name="cardTitle">{{this.name}}</h5>
+                               <p class="card-text" name="cardText">{{this.description}}</p>
+
+                               <div class='d-flex'>
+                                   <a href="/products/{{this._id}}" class="btn btn-dark mx-1">More info</a>
+                               </div>
+
+                           </div>
+                           <div class="card-footer bg-light d-flex justify-content-between">
+                               <strong><a href="/users/{{this.requester._id}}" class="text-muted">{{this.requester.name}}</a></strong>
+                               <h6 class="text-muted">{{this.offers}} Offers</h6>
+                           </div>
+                       </div>
+                   {{/each}}
+
+                </div>
+                <br>
+                <br>
+                <div class="profile-content">
+                    <!--TODO: When button is clicked, I need to render the form page for Items For Sale -->
+                   <center>Items For Sale <button type="button" class="btn btn-primary btn-sm">Add</button></center>
+                    {{#each user.forSaleItems}}
+
+                    <!-- Fill with all of current user's product request cards, but no ability to make a bid-->
+                        <div class="card">
+                            <img src="{{this.image}}" class="card-img-top" alt="{{this.title}}">
+                            <div>
+                                <h6 class="text-muted m-3 format-timefrom" style="float:right">{{this.createdAt}}</h6>
+                                <div style="height: 25px"></div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" name="cardTitle">{{this.title}}</h5>
+                                <p class="card-text" name="cardText">{{this.description}}</p>
+
+
+                                <div class='d-flex'>
+                                    <!--TODO: LINK TO EDIT ROUTE IN forSaleProduct controller-->
+                                    <!--TODO: Need to handle BOTH edit and delete requests-->
+                                    <button type="button" class="btn btn-success">
+                                        <a href="/forSaleProducts/{{this._id}}/edit"><b>Edit</b></a>
+                                    </button>
+
+                                    <button type="button" class="btn btn-danger">
+                                        <form method="POST" action="/forSaleProducts/{{this._id}}?_method=DELETE">
+                                            <button type="submit"> Delete </button>
+                                        </form>
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="card-footer bg-light d-flex justify-content-between">
+                                <strong><a href="/users/{{this.requester._id}}" class="text-muted">{{this.requester.name}}</a></strong>
+                                <h6 class="text-muted">{{this.offers}} Offers</h6>
+                            </div>
+                        </div>
+
+                    {{/each}}
+                </div>
+    		</div>
+
+    	</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"></script>
+
+</body>

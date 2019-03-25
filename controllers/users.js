@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Product = require('../models/product');
+const forSaleProduct = require('../models/forSaleProduct');
 const jwt = require('jsonwebtoken');
 const emailer = require('../services/sendgrid');
 
@@ -22,10 +24,23 @@ module.exports = function (app) {
     });
 
     // GET authenticated user's profile page
-    app.get('/profile', (req, res) => {
-        if (!req.user)
+    app.get('/profile/:id', (req, res) => {
+        if (!req.user){
             return res.redirect('/signin?error=You are not signed in.');
-        res.render('profile', { user: req.user });
+        }else{
+            //NOTE: If I just pass in the req.user object, I should be able to access all of the user's attributes 
+            // let productRequests;
+            // let forSaleProducts;
+            //
+            // User.findById(req.user._id).then((user) => {
+            //     productRequests = user.products
+            //     forSaleProducts = user.forSaleProducts
+            // })
+
+
+            res.render('profile', { user: req.user });
+        }
+
     });
 
     // POST signup

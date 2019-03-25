@@ -1,7 +1,6 @@
 /* MULTIPLE PAGES */
 html, body {
-    background-color: #9A9999;
-    margin-bottom: 250px;
+background-color: rgb(248, 249, 250);
 }
 .col-centered{
     float: none;

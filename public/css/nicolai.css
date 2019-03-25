@@ -1,0 +1,333 @@
+:root {
+  /* https://flatuicolors.com/palette/in */
+  --pink: #ae77c1;
+  --mid-grey: #96a4b0;
+  --dark-grey: #2C3A47;
+  --purple: #82589F;
+  --red: #FC427B;
+  --off-white: #e5e5e5;
+}
+
+* {
+  font-family: 'Helvetica Neue', Helvetica, "Lucida Grande", Arial, sans-serif;
+}
+
+*:focus {
+  outline: var(--pink) auto 2px;
+}
+
+html,body {
+  width: 100% !important;
+  height: 100% !important;
+  background-color: var(--off-white) !important;
+}
+
+body {
+  font-size: 18px;
+  margin: 0;
+}
+
+button {
+  border: none;
+  color: white;
+  background-color: var(--purple);
+  cursor: pointer;
+}
+
+textarea {
+  padding: 0.5em;
+  font-size: 1em;
+  resize: none;
+}
+
+a {
+  color: var(--purple);
+}
+
+.hidden {
+  display:none;
+}
+
+.pageTitle {
+  margin-top: 30vh;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+.pageSubtitle {
+  margin-top: 0em;
+  font-size: 1.2em;
+  color: var(--dark-grey);
+}
+
+.joinChatForm {
+  width: 100%;
+  margin-top: 1.5em;
+  display: flex;
+}
+
+.usernameForm {
+  display: flex;
+  width: 66%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#usernameInput {
+  font-size: 1em;
+  padding: 0.75em 1em;
+  width: 100%;
+}
+
+#createUserBtn {
+  width: 45%;
+  min-width: 5em;
+  font-size: 1em;
+  padding: 0.4em;
+}
+
+.channels {
+  display: flex;
+  margin-top: 1em;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.newChannelForm {
+  display: flex;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 1em;
+}
+
+#newChannelInput {
+  font-size: 0.75em;
+  padding: 0.5em;
+  width: 80%;
+  border: solid 1px var(--mid-grey);
+  background-color: var(--dark-grey);
+  color: var(--off-white);
+}
+
+#newChannelBtn {
+  font-size: 0.75em;
+  padding: 0.5em;
+  width: 20%;
+  min-width: 25px;
+}
+
+.channel {
+  font-size: 18px;
+  padding: 0.5em 0.5em 0.5em 1em;
+  /* padding: 10px 0px; */
+  /* margin: 2px 0px; */
+  cursor: pointer;
+}
+
+.channel:hover, .collapse-btn:hover {
+  color: var(--off-white);
+}
+
+.currentChannel {
+  font-weight: bold;
+  font-size: 1em;
+  color: white;
+  background-color: var(--pink);
+  margin-bottom: 0.25em;
+}
+
+.brand {
+  padding: 0 0.5em 0 0.5em;
+  margin-bottom: 0.4em;
+}
+
+.logoutBtn {
+  color: var(--mid-grey);
+  padding: 0 0.5em 0 1em;
+  margin:0;
+}
+
+.logoutBtn:hover {
+  cursor: pointer;
+}
+
+.channelsLabel {
+  padding: 0 0.5em 0 0.62em;
+  margin-bottom: 0.5em;
+}
+
+.rightPane {
+  width: 80%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--off-white);
+}
+
+.rightPaneFluid{
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.leftPane {
+  width: 20%;
+  /* min-width: 230px; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-grey);
+  color: var(--off-white);
+}
+
+.collapse-btn {
+  position: absolute;
+  left: 18%;
+  /* top: 1em; */
+  color: white;
+  cursor: pointer;
+  padding: 1em 1em 1em 0;
+}
+
+.usersOnlineContainer {
+  padding: 1em;
+}
+
+.usersOnline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: auto;
+  margin-bottom: 0.5em;
+  font-size: 1em;
+}
+
+.usersOnlineTitle {
+  margin-bottom: 0.5em;
+}
+
+.userOnline {
+  margin: 0;
+  padding: 0.5em 0.5em 0.5em 0;
+}
+
+.textChatDivide {
+  border: 0.5px solid var(--pink);
+  margin-bottom: 0.75em;
+}
+
+.chatBox {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+label {
+  display: block;
+}
+
+#chatInput {
+  width: 100%;
+}
+
+#sendChatBtn {
+  width: 15%;
+  min-width: 5em;
+  font-size: 1em;
+}
+
+.messageContainer {
+  display: flex;
+  margin-bottom: 0.75em;
+  padding-bottom: 0.75em;
+  flex-direction: column;
+}
+
+.messagesTitle {
+  color: var(--dark-grey);
+}
+
+.message {
+  margin-bottom: 0.3em;
+}
+
+.messageUser {
+  display: inline;
+  color: var(--red);
+  font-weight: bold;
+}
+
+.messageText {
+  display: inline;
+}
+
+.mainContainer {
+  display: none;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+/* HIDDEN LEFT PANE */
+.hidden {
+  display: none;
+}
+
+.hiddenLeftPane { /* KEEP THIS AFTER LEFTPANE */
+  width: 3% !important;
+}
+
+.hiddenCollapseBtn {
+  left: 1.25% !important;
+}
+
+.maximizedRightPane {
+  width: 97% !important;
+}
+
+/* SMALL DESKTOP AND BELOW */
+@media screen and (max-width: 991px) {
+  body {
+    font-size: 16px;
+  }
+
+  .leftPane {
+    width: 30%;
+  }
+
+  .collapse-btn {
+    left: 27%;
+  }
+
+  .hiddenCollapseBtn {
+    left: 1.1% !important;
+  }
+
+  .rightPane {
+    width: 70%;
+  }
+
+}
+
+/* TABLET AND BELOW */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* PHONES */
+@media screen and (max-width: 400px) {
+  .hiddenCollapseBtn {
+    left: 0.8% !important;
+  }
+}

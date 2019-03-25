@@ -28,6 +28,7 @@ app.use(require('./middleware/check-auth'));
 // Controllers
 require('./controllers/users')(app);
 require('./controllers/products')(app);
+require('./controllers/forSaleProducts')(app);
 require('./controllers/temp-chats')(app, server);
 
 
