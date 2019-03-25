@@ -10,6 +10,10 @@ module.exports = function (app) {
         }).catch(console.error);
     });
 
+    app.get('/home', (req, res) => {
+        res.render('home');
+    });
+
 // When the user uses the search bar
     app.get('/search', (req, res) => {
         // console.log("IM IN SEARCH ROUTE!");

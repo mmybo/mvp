@@ -1,0 +1,25 @@
+.masthead {
+  height: 550px;
+  min-height: 250px;
+  background-image: url('../images/bg-masthead.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 0px;
+  left: 0px;
+
+}
+
+.navbar-brand {
+    padding-right: .5em;
+    padding-left: .5em;
+}
+
+.right {
+    margin-right: -6em;
+}
+
+
+.left {
+    margin-left: -6em;
+}
