@@ -3,8 +3,89 @@ const Product = require('../models/product');
 const productForSale = require('../models/productForSale');
 const jwt = require('jsonwebtoken');
 const emailer = require('../services/sendgrid');
+const mongoose = require('mongoose');
+const Grid = require('gridfs-stream');
+const DBURL = process.env.MONGODB_URI || 'mongodb://localhost/mmybo';
 
-module.exports = function (app) {
+module.exports = function (app, upload) {
+
+    //Create mongo connection
+    // const conn = mongoose.connection;
+    // Init Stream
+
+    var conn = mongoose.createConnection(DBURL);
+    conn.once('open', function () {
+
+      var gfs = Grid(conn.db, mongoose.mongo);
+      gfs.collection('user-pictures');//user-pictures is our collection name
+
+
+
+      // GET authenticated user's profile page
+      app.get('/profile/:id', (req, res) => {
+          if (!req.user){
+              return res.redirect('/signin?error=You are not signed in.');
+          }else{
+
+              User.findById(req.user._id).then(async(user) => {
+
+                  //  if(file.contentType === 'image/jpeg' || file.contentType === 'image/png'){
+                  //Grab User's Product Requests and their Products to Sell
+
+                  var userProducts = []
+                  var userProductsToSell = []
+
+                  await Product.find({requester: req.user._id}).then((products) => {
+                      for (i = 0; i < products.length; i++) {
+                            userProducts.push(products[i]);
+                          }
+                  })
+                  await productForSale.find({owner: req.user._id}).then((productsForSale) => {
+                      for (i = 0; i < productsForSale.length; i++) {
+                            userProductsToSell.push(productsForSale[i]);
+                          }
+                  })
+                  console.log("Products found:", userProducts);
+                  console.log("productsForSale found:", userProductsToSell);
+
+                  res.render('user-profile', { user: req.user, productRequests: userProducts, productsForSale: userProductsToSell});
+
+              })
+
+              // console.log("userProducts:",userProducts);
+              // console.log("userProductsToSell:",userProductsToSell);
+
+
+          }
+
+      });
+
+      // Route for images that displays the ACTUAL image not just its data. For that we use gfs.createReadStream
+      // Display Single file object
+      app.get('/image/:filename', (req, res) => {
+          console.log("Entered image get route!");
+
+          // console.log("This is avatar:", req.user.avatar.id);
+
+          gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+              //Check if any files exist
+              if(!file || file.length === 0){
+                  return res.status(404).json({
+                      err: 'No file exist'
+                  })
+              }
+              // Read output to broswer
+              const readstream = gfs.createReadStream(file.filename);
+              readstream.pipe(res);
+
+
+          });
+      });
+
+  }) //End of gfs listener
+
+
+
 
     // GET signup page
     app.get('/signup', (req, res) => {
@@ -16,6 +97,9 @@ module.exports = function (app) {
         res.render('signin');
     });
 
+
+
+
     // GET profile page
     app.get('/users/:id', (req, res) => {
         User.findById(req.params.id).then(user => {
@@ -23,44 +107,13 @@ module.exports = function (app) {
         });
     });
 
-    // GET authenticated user's profile page
-    app.get('/profile/:id', (req, res) => {
-        if (!req.user){
-            return res.redirect('/signin?error=You are not signed in.');
-        }else{
 
-            User.findById(req.user._id).then(async(user) => {
-
-                var userProducts = []
-                var userProductsToSell = []
-
-                await Product.find({requester: req.user._id}).then((products) => {
-                    for (i = 0; i < products.length; i++) {
-                          userProducts.push(products[i]);
-                        }
-                })
-                await productForSale.find({owner: req.user._id}).then((productsForSale) => {
-                    for (i = 0; i < productsForSale.length; i++) {
-                          userProductsToSell.push(productsForSale[i]);
-                        }
-                })
-                console.log("Products found:", userProducts);
-                console.log("productsForSale found:", userProductsToSell);
-
-                res.render('user-profile', { user: req.user, productRequests: userProducts, productsForSale: userProductsToSell});
-
-            })
-
-            // console.log("userProducts:",userProducts);
-            // console.log("userProductsToSell:",userProductsToSell);
-
-
-        }
-
-    });
 
     // POST signup
-    app.post('/signup', async (req, res) => {
+    app.post('/signup', upload.single('file'), async (req, res) => {
+
+        console.log({file: req.file})
+
         // Check if the user already exists
         const user = await User.findOne({ email: req.body.email }, 'email password name');
         if (user) {
@@ -79,6 +132,10 @@ module.exports = function (app) {
             });
         } else {
             const newUser = new User(req.body);
+
+
+            newUser.avatar = String(req.file.filename)
+
             newUser.save().then(user => {
                 emailer.sendWelcomeEmail(user.name, user.email);
                 const token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: '60 days' });

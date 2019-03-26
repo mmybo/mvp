@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-centered">
-            <form action="/signup" class="card container px-0 mt-5" method="POST">
+            <form action="/signup" class="card container px-0 mt-5" enctype="multipart/form-data" method="POST">
                 <div class="card-header">
-                    <h3>Sign Up</h3>
+                    <center><h3>Sign Up</h3></center>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -19,11 +19,21 @@
                         <input type="password" name="password" autocomplete="current-password" class="form-control"
                             placeholder="*****">
                     </div>
+                    <br>
+
+
+                  <div class="custom-file mb-3">
+                    <input type="file" name="file" id="file" class="custom-file-input">
+                    <label for="file" class="custom-file-label">Choose Profile Image</label>
+                  </div>
+
+
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-dark" type="submit">Sign Up</button>
+                     <center><button class="btn btn-dark" type="submit">Sign Up</button></center>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
