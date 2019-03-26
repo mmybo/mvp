@@ -9,7 +9,7 @@ const UserSchema = new Schema({
     rating: { type: Number },
     products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
     chatrooms: [{ type: Schema.Types.ObjectId, ref: 'Chatroom' }],
-    forSaleProducts: [{ type: Schema.Types.ObjectId, ref: 'forSaleItem' }]
+    productsForSale: [{ type: Schema.Types.ObjectId, ref: 'productsForSale' }]
 }, { timestamps: true });
 
 UserSchema.pre('save', function (next) {

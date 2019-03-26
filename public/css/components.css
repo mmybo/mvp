@@ -1,0 +1,27 @@
+.center {
+    margin: 0 auto;
+}
+
+
+p.offer-text {
+    max-width: 21em;
+}
+
+
+.push-down {
+    margin-top: .8em;
+}
+
+.push-down-md {
+    margin-top: 2.6em;
+}
+
+.push-down-lg {
+    margin-top: 3.6em;
+}
+
+h1.primary-context {
+    font-weight: 600;
+    font-size: 3.6em;
+    letter-spacing: 1px;
+}

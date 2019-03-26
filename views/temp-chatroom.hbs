@@ -1,36 +1,30 @@
+<div class="mainContainer">
 
-  <body>
+  <div class="channelsAndUsersOnlineContainer">
+    <center><h1 class="brand">Manage Offers</h1></center>
+    <div class="channels">
+        <h2 class="channelsLabel">Channels</h2>
+        {{#each userChatrooms}}
+            <div class="channel" id="{{this._id}}">{{this.channel}}</div>
+        {{/each}}
+    </div>
+  </div>
 
-    <!-- <form class="usernameForm">
-      <input id="usernameInput" placeholder="Username"></input>
-      <button id="createUserBtn">Join Chat</button>
-    </form> -->
-
-    <div class="mainContainer">
-      <div class="channelsAndUsersOnlineContainer">
-        <center><h1 class="brand">Manage Offers</h1></center>
-        <div class="channels">
-            <h2 class="channelsLabel">Channels</h2>
-            {{#each userChatrooms}}
-                <div class="channel" id="{{this._id}}">{{this.channel}}</div>
-            {{/each}}
-        </div>
-
-        <!--NOTE: No need to alert users of other online users -->
-        <!-- <h2>Online Users</h2> -->
-        <!-- <div class="usersOnline"></div> -->
+  <div class="chatContainer">
+    <div class="chatContainerFluid">
+      <div class="messageContainer">
+          <h2>Messages</h2>
       </div>
-      <div class="chatContainer">
-        <div class="chatContainerFluid">
-          <div class="messageContainer">
-              <h2>Messages</h2>
-          </div>
-          <div class="textChatDivide"></div>
+      <div class="textChatDivide"></div>
 
-          <div class="chatBox"><textarea id="chatInput" placeholder="Type a message"></textarea><button class="btn" id="sendChatBtn">Send</button></div>
+      <div class='rightPan'>
+          <div class="chatBox">
+              <textarea id="chatInput" placeholder="Type a message"></textarea>
+              <button id="sendChatBtn">Send</button>
+          </div>
           <input type="hidden" id="user_id" value="{{authenticatedUser._id}}">
-        </div>
       </div>
     </div>
+  </div>
 
-  </body>
+</div>

@@ -9,9 +9,9 @@
 
       <div class='right'>
           <!--NOTE: Manage Offers and Items For Sale should only appear when user is logged in, just wrap these navbar items in if{authenticatedUser}. -->
-          <a class="navbar-brand" href="#">My Profile</a>
+          <a class="navbar-brand" href="/profile/{{authenticatedUser._id}}">My Profile</a>
           <a class="navbar-brand" href="/products/new">New Product Request</a>
-          <a class="navbar-brand" href="#">Sell Product</a>
+          <a class="navbar-brand" href="/products-for-sale/new">Sell Product</a>
           <a class="navbar-brand" href="/manage-offers/{{authenticatedUser._id}}">Manage Offers</a>
           <a class="btn btn-primary" href="/signout">Sign Out</a>
           <button type="button" class="btn btn-light right" data-toggle="dropdown" aria-haspopup="true"

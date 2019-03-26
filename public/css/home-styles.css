@@ -1,7 +1,8 @@
 .masthead {
-  height: 550px;
+height: 44em;
   min-height: 250px;
   background-image: url('../images/bg-masthead.jpg');
+  background-color: #212529;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,12 +10,24 @@
   left: 0px;
 
 }
+.overlay{
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: .3;
+}
+
+
 
 .home-icon {
     margin: 500px auto
 }
 
 .search-height{
+    padding-top: 5em;
     height: 500px
 }
 

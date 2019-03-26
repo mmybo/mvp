@@ -1,0 +1,31 @@
+<!-- Keep for reference, but already being used in user profile page -->
+
+
+<div class="card">
+    <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+    <div>
+        <h6 class="text-muted m-3 format-timefrom" style="float:right">{{this.createdAt}}</h6>
+        <div style="height: 25px"></div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title" name="cardTitle">{{this.name}}</h5>
+        <p class="card-text" name="cardText">{{this.description}}</p>
+
+        <div class='d-flex'>    
+            <a href="/products-for-sale/{{this._id}}/edit" class="btn btn-secondary mx-1">Edit</a>
+
+
+            <a href="/products-for-sale/:id" class="btn btn-danger mx-1">Delete</a>
+
+            <form method="POST" action="/products-for-sale/{{this._id}}?_method=DELETE">
+                <button type="button" class="btn btn-danger mx-1">Delete</button>
+            </form>
+
+        </div>
+
+    </div>
+    <div class="card-footer bg-light d-flex justify-content-between">
+        <strong><a href="/users/{{this.requester._id}}" class="text-muted">{{this.requester.name}}</a></strong>
+
+    </div>
+</div>

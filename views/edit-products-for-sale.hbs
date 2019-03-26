@@ -1,0 +1,52 @@
+
+
+<form method="POST" action="/products-for-sale/{{productForSale._id}}?_method=PUT" class="card container mt-5 px-0">
+
+    <div class="card-header">
+            <h3>Edit Product To Sell: {{productForSale.name}}</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="form-group">
+            <label for="name">Product Name:</label>
+            <input type="text" name="name" id="product-title" class="form-control" value="{{productForSale.name}}" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select name="category" class="form-control">
+                <option default>{{productForSale.category}}</option>
+                <option value="appliances">Appliances</option>
+                <option value="books">Books</option>
+                <option value="computers">Computers</option>
+                <option value="electronics">Electronics</option>
+                <option value="movies-tv">Movies/TV</option>
+                <option value="music">Music</option>
+                <option value="phones">Phones</option>
+                <option value="sports-outdoor">Sports/Outdoor</option>
+                <option value="video-games">Video Games</option>
+                <option value="general">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Product Description:</label>
+            <input type="text" name="description" class="form-control" value="{{productForSale.description}}" required>
+        </div>
+        <div class="form-group">
+            <label for="requirements">Requirements:</label>
+            <input type="text" name="requirements" class="form-control" value="{{productForSale.requirements}}" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="text" class="form-control form-control-readonly" id="product-image-input" name="image"
+                value="{{productForSale.image}}" readonly>
+        </div>
+        <div id="image-selector">
+
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <button class="btn btn-dark">Submit</button>
+    </div>
+
+</form>

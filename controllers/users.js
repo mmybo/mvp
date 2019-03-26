@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Product = require('../models/product');
-const forSaleProduct = require('../models/forSaleProduct');
+const productForSale = require('../models/productForSale');
 const jwt = require('jsonwebtoken');
 const emailer = require('../services/sendgrid');
 
@@ -28,17 +28,33 @@ module.exports = function (app) {
         if (!req.user){
             return res.redirect('/signin?error=You are not signed in.');
         }else{
-            //NOTE: If I just pass in the req.user object, I should be able to access all of the user's attributes 
-            // let productRequests;
-            // let forSaleProducts;
-            //
-            // User.findById(req.user._id).then((user) => {
-            //     productRequests = user.products
-            //     forSaleProducts = user.forSaleProducts
-            // })
+
+            User.findById(req.user._id).then(async(user) => {
+
+                var userProducts = []
+                var userProductsToSell = []
+
+                await Product.find({requester: req.user._id}).then((products) => {
+                    for (i = 0; i < products.length; i++) {
+                          userProducts.push(products[i]);
+                        }
+                })
+                await productForSale.find({owner: req.user._id}).then((productsForSale) => {
+                    for (i = 0; i < productsForSale.length; i++) {
+                          userProductsToSell.push(productsForSale[i]);
+                        }
+                })
+                console.log("Products found:", userProducts);
+                console.log("productsForSale found:", userProductsToSell);
+
+                res.render('user-profile', { user: req.user, productRequests: userProducts, productsForSale: userProductsToSell});
+
+            })
+
+            // console.log("userProducts:",userProducts);
+            // console.log("userProductsToSell:",userProductsToSell);
 
 
-            res.render('profile', { user: req.user });
         }
 
     });

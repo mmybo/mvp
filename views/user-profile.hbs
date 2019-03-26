@@ -39,7 +39,7 @@
                 <div class="profile-content">
     			   <center>Product Requests Made</center>
 
-                   {{#each user.products}}
+                   {{#each productRequests}}
                    <!-- Fill with all of current user's product request cards, but no ability to make a bid-->
                        <div class="card">
                            <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
@@ -68,8 +68,8 @@
                 <br>
                 <div class="profile-content">
                     <!--TODO: When button is clicked, I need to render the form page for Items For Sale -->
-                   <center>Items For Sale <button type="button" class="btn btn-primary btn-sm">Add</button></center>
-                    {{#each user.forSaleItems}}
+                   <center>Items For Sale <a href='/products-for-sale/new'><button type="button" class="btn btn-primary btn-sm">Add</button></center></a>
+                    {{#each productsForSale}}
 
                     <!-- Fill with all of current user's product request cards, but no ability to make a bid-->
                         <div class="card">
@@ -84,17 +84,15 @@
 
 
                                 <div class='d-flex'>
-                                    <!--TODO: LINK TO EDIT ROUTE IN forSaleProduct controller-->
                                     <!--TODO: Need to handle BOTH edit and delete requests-->
                                     <button type="button" class="btn btn-success">
-                                        <a href="/forSaleProducts/{{this._id}}/edit"><b>Edit</b></a>
+                                        <a href="/products-for-sale/{{this._id}}/edit"><b>Edit</b></a>
                                     </button>
 
-                                    <button type="button" class="btn btn-danger">
-                                        <form method="POST" action="/forSaleProducts/{{this._id}}?_method=DELETE">
-                                            <button type="submit"> Delete </button>
-                                        </form>
-                                    </button>
+                                    <form method="POST" action="/products-for-sale/{{this._id}}?_method=DELETE">
+                                        <button type="submit" class="btn btn-danger"> Delete </button>
+                                    </form>
+
                                 </div>
 
                             </div>

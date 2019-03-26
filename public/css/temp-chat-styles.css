@@ -1,5 +1,8 @@
+/* Shoutout to Nicolai Safai (@nsafai) for partial inspiration the design and style. */
 
-
+* {
+    font-family: 'Helvetica Neue', Helvetica, "Lucida Grande", Arial, sans-serif;
+}
 .usernameForm{
   display: flex;
   width : 50%;
@@ -54,36 +57,83 @@
 
 .channel{
   font-size: 18px;
-  padding : 10px 0px;
+  padding: 0.5em 0.5em 0.5em 1em;
   margin : 2px 0px;
   cursor : pointer;
 }
 
 .channel:hover{
-  color : grey;
+    font-weight: bold;
+    font-size: 1em;
+    color: white;
+    background-color: #AD77C0;
+    margin-bottom: 0.25em;
 }
 
 .channel-current{
   font-weight: bold;
   font-size: 18px;
-  padding : 10px 0px;
+  padding: 0.5em 0.5em 0.5em 1em;
   margin : 2px 0px;
-  background-color: #4f9689;
+  background-color: #AD77C0;
 }
 
 .brand{
-  margin-left: 8px;
+    padding: 0 0.5em 0 0.5em;
+    margin-bottom: 0.4em;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+button {
+    border: none;
+    color: white;
+    background-color: #82589F;
+    cursor: pointer;
+}
+
+textarea {
+    padding: 0.5em;
+    font-size: 1em;
+    resize: none;
+}
+
+.rightPan {
+    width: 80%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #E5E5E5;
 }
 
 .channelsLabel{
-  margin-left: 8px;
+    padding: 0 0.5em 0 0.62em;
+    margin-bottom: 0.5em;
 }
 
 .chatContainer {
   width : 80%;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #ededed;
 }
 
 .chatContainerFluid{
@@ -92,13 +142,26 @@
   flex-direction: column;
 }
 
-.channelsAndUsersOnlineContainer{
+.mainContainer{
+  display: flex;
+  width : 100%;
+}
+
+.channelsAndUsersOnlineContainer {
   width : 20%;
   display: flex;
   flex-direction: column;
   height : 750px;
   background-color: #4d394b;
   color : white;
+
+  width: 20%;
+    /* min-width: 230px; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #2B3A47;
+    color: #fff;
 }
 
 .usersOnline{
@@ -117,7 +180,7 @@
 }
 
 .textChatDivide{
-  border : 0.5px solid green;
+  border : 0.5px solid #82589F;
   margin-bottom: 10px;
 }
 
@@ -137,8 +200,9 @@ label {
 }
 
 #sendChatBtn{
-  width : 10%;
-  display: inline;
+    width: 15%;
+    min-width: 5em;
+    font-size: 1em;
 }
 
 .messageContainer{
@@ -154,16 +218,10 @@ label {
 
 .messageUser{
   display: inline;
-  color : red;
+  color : #FC427B;
   font-weight: bold;
 }
 
 .messageText{
   display: inline;
-}
-
-.mainContainer{
-  display: flex;
-  flex-direction: row;
-  width : 100%;
 }
