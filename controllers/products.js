@@ -4,13 +4,13 @@ const ImageSuggestor = require('../services/image-suggestor');
 
 module.exports = function (app) {
 
-    app.get('/', (req, res) => {
+    app.get('/index', (req, res) => {
         Product.find().populate('requester').then(products => {
             res.render('index', { products });
         }).catch(console.error);
     });
 
-    app.get('/home', (req, res) => {
+    app.get('/', (req, res) => {
         res.render('home');
     });
 
@@ -19,6 +19,7 @@ module.exports = function (app) {
         // console.log("IM IN SEARCH ROUTE!");
         term = new RegExp(req.query.term, 'i')
         console.log("Term:", term);
+
         Product.find({$or:[{'name': term}, {'category': term}, {'description': term}]}).then(products => {
             res.render('index', { products });
         }).catch(console.error);
