@@ -14,7 +14,6 @@ require('./data/database');
 const storage = require('./data/database').storage;
 // var gfs = require('./data/database').gfs;
 
-
 const upload = multer({storage});
 
 

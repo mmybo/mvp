@@ -25,11 +25,28 @@ module.exports = function (app) {
     });
 
     app.get('/r/:category', (req, res) => {
-        Product.find({ category: req.params.category })
-            .populate('requester').then(products => {
+
+        if (req.params.category === 'general'){
+            console.log("Req.params is general!");
+            Product.find({}).populate('requester').then(products => {
                 res.render("index", { products });
             }).catch(console.error);
+
+        }else{
+            Product.find({ category: req.params.category })
+                .populate('requester').then(products => {
+                    res.render("index", { products });
+                }).catch(console.error);
+        }
     });
+
+    // app.get('/r/general', (req, res) => {
+    //     console.log("Im in general!");
+    //     Product.find()
+    //         .populate('requester').then(products => {
+    //             res.render("index", { products });
+    //         }).catch(console.error);
+    // });
 
     app.get('/products/new', (req, res) => {
         var currentUser = req.user;
@@ -48,7 +65,9 @@ module.exports = function (app) {
                 .then(user => {
                     user.products.unshift(product);
                     user.save();
-                    res.redirect('/products/' + product._id);
+
+                    res.redirect('/')
+                    // res.redirect('/products/' + product._id);
                 })
                 .catch(err => {
                     console.log(err.message);
